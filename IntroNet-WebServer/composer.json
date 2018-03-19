@@ -1,0 +1,15 @@
+{
+    "name": "vendor/intro-net-web-server",
+    "description": "Description of project IntroNet-WebServer.",
+    "authors": [
+        {
+            "name": "hussam",
+            "email": "your@email.here"
+        }
+    ],
+
+    "require": {
+        "phpunit/phpunit": "6.*"
+    }
+
+}
