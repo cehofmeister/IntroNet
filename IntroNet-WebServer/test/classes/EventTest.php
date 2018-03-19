@@ -112,13 +112,15 @@ class EventTest extends TestCase {
 
     /**
      * @covers Event::getCountDown
+     * @depends testCreate
      * @todo   Implement testGetCountDown().
      */
-    public function testGetCountDown() {
+    public function testGetCountDown(Event $event) {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
+        $this->assertEquals('01/05/1970 05:00', $event->getCountDown());
     }
 
     /**
@@ -140,10 +142,11 @@ class EventTest extends TestCase {
 
     /**
      * @covers Event::getNumberOfParticipant
+     * @covers Database::count
      * @depends testCreate
      */
-    public function testGetNumberOfParticipant(Event $event) {
-        //$this->assertEquals(0, $event->getNumberOfParticipant());
+    public function testGetNumberOfConferenceParticipant(Event $event) {
+        $this->assertEquals(0, $event->getNumberOfConferenceParticipant());
     }
 
     /**
@@ -152,9 +155,9 @@ class EventTest extends TestCase {
      */
     public function testGetNumberOfParticipantion() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+       /* $this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
     /**
@@ -163,9 +166,9 @@ class EventTest extends TestCase {
      */
     public function testIsRegister() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
     /**
@@ -174,9 +177,9 @@ class EventTest extends TestCase {
      */
     public function testIsAttended() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
     /**
@@ -185,9 +188,9 @@ class EventTest extends TestCase {
      */
     public function testAddPoster() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
     /**
@@ -196,9 +199,9 @@ class EventTest extends TestCase {
      */
     public function testIsLeft() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
     /**
@@ -207,9 +210,9 @@ class EventTest extends TestCase {
      */
     public function testMissingParticipants() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
     /**
@@ -218,9 +221,9 @@ class EventTest extends TestCase {
      */
     public function testAllParticipants() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
     /**
@@ -229,9 +232,9 @@ class EventTest extends TestCase {
      */
     public function testGetEvents() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
     /**
@@ -240,9 +243,9 @@ class EventTest extends TestCase {
      */
     public function testGetEvent() {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
+        /*$this->markTestIncomplete(
                 'This test has not been implemented yet.'
-        );
+        );*/
     }
 
 }

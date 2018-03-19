@@ -111,7 +111,7 @@ class Event {
      * @return time returns End time of the event
      */
     public function getEndTime(){
-        return  date("H:i",$this->endTime);
+        return  date("H:i",strtotime($this->endTime));
     }
     /**
      * This function shows the count down of the event
@@ -146,7 +146,7 @@ class Event {
         return Database::count("Participant", "WHERE conference_id=".$this->conference_id);
     }
      /**
-     * This is the function which gets the total number of participants
+ * This is the function which gets the total number of participants
      * @param getNumberOfParticipantion Gets the total number of registered participants
      * @return int total number of participants
      */
