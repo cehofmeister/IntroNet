@@ -6,6 +6,7 @@
 use PHPUnit\Framework\TestCase;
 require "../../classes/Event.php";
 require "../../classes/Validation.php";
+require "../../classes/Database.php";
 class EventTest extends TestCase {
 
     /**
@@ -147,6 +148,7 @@ class EventTest extends TestCase {
      */
     public function testGetNumberOfConferenceParticipant(Event $event) {
         $this->assertEquals(0, $event->getNumberOfConferenceParticipant());
+
     }
 
     /**
