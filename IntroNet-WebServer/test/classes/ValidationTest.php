@@ -31,6 +31,7 @@ class ValidationTest extends TestCase {
     /**
      * @covers Validation::validate
      * @dataProvider dataSet
+     * White box
      */
     public function testValidate($input, $regex,$valid) {
         try {

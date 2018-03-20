@@ -13,7 +13,7 @@ class Database {
         try{
             $dbConfig = @$GLOBALS['config']['database'];
             if(!$dbConfig) throw new Exception (10);
-//                $host = $dbConfig['hosta'];
+//                $host = $dbConfig['host'];
 //                $name = $dbConfig['name'];
 //                $username = $dbConfig['username'];
 //                $password = $dbConfig['password'];

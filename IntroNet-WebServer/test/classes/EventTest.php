@@ -33,6 +33,7 @@ class EventTest extends TestCase {
     /**
      * @covers Event::create
      * @todo   Implement testCreate().
+     * Black box?
      */
     public function testCreate() {
         $name="Test Event";
@@ -49,13 +50,9 @@ class EventTest extends TestCase {
     /**
      * @covers Event::getName
      * @depends testCreate
-     * @todo   Implement testGetName().
+     * Black box
      */
     public function testGetName(Event $event) {
-        // Remove the following lines when you implement this test.
-        //$this->markTestIncomplete(
-        //        'This test has not been implemented yet.'
-        //);
         $this->assertEquals("Test Event", $event->getName());
 
     }
@@ -63,13 +60,9 @@ class EventTest extends TestCase {
     /**
      * @covers Event::setName
      * @depends testCreate
-     * @todo   Implement testSetName().
+     * Black box
      */
     public function testSetName(Event $event) {
-        // Remove the following lines when you implement this test.
-        //$this->markTestIncomplete(
-        //        'This test has not been implemented yet.'
-        //);
         $event->setName("Test NameSet");
         $this->assertEquals("Test NameSet", $event->getName());
     }
@@ -77,6 +70,7 @@ class EventTest extends TestCase {
     /**
      * @covers Event::getStartDate
      * @depends testCreate
+     * Black box
      */
     public function testGetStartDate(Event $event) {
         //var_dump($event);
@@ -87,6 +81,7 @@ class EventTest extends TestCase {
     /**
      * @covers Event::getStartTime
      * @depends testCreate
+     * Black box
      */
     public function testGetStartTime(Event $event) {
         date_default_timezone_set('UTC');
@@ -96,6 +91,7 @@ class EventTest extends TestCase {
     /**
      * @covers Event::getEndDate
      * @depends testCreate
+     * Black box
      */
     public function testGetEndDate(Event $event) {
         date_default_timezone_set('UTC');
@@ -105,6 +101,7 @@ class EventTest extends TestCase {
     /**
      * @covers Event::getEndTime
      * @depends testCreate
+     * Black box
      */
     public function testGetEndTime(Event $event) {
         date_default_timezone_set('UTC');
@@ -114,19 +111,16 @@ class EventTest extends TestCase {
     /**
      * @covers Event::getCountDown
      * @depends testCreate
-     * @todo   Implement testGetCountDown().
+     * Black box
      */
     public function testGetCountDown(Event $event) {
-        // Remove the following lines when you implement this test.
-        /*$this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );*/
         $this->assertEquals('01/05/1970 05:00', $event->getCountDown());
     }
 
     /**
      * @covers Event::getStartDay
      * @depends testCreate
+     * Black box
      */
     public function testGetStartDay(Event $event) {
         date_default_timezone_set('UTC');
@@ -136,6 +130,7 @@ class EventTest extends TestCase {
     /**
      * @covers Event::getType
      * @depends testCreate
+     * Black box
      */
     public function testGetType(Event $event) {
         $this->assertEquals('One to One', $event->getType());
@@ -145,6 +140,7 @@ class EventTest extends TestCase {
      * @covers Event::getNumberOfParticipant
      * @covers Database::count
      * @depends testCreate
+     * Black box
      */
     public function testGetNumberOfConferenceParticipant(Event $event) {
         $this->assertEquals(0, $event->getNumberOfConferenceParticipant());
