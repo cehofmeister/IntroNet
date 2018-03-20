@@ -72,10 +72,11 @@ class ValidationTest extends TestCase {
         'Test Date 10'=>   ["04/01/12016",  Validation::DATE,       FALSE],
             
         // Time
-        'Test Time 1'=>    ["",             Validation::DATE,       FALSE],
-        'Test Time 2'=>    ["1",            Validation::DATE,       FALSE],
-        'Test Time 3'=>    ["10:70",        Validation::DATE,       FALSE],
-        'Test Time 4'=>    ["10:55",        Validation::DATE,       TRUE],
+        'Test Time 1'=>    ["",             Validation::TIME,       FALSE],
+        'Test Time 2'=>    ["1",            Validation::TIME,       FALSE],
+        'Test Time 3'=>    ["03:70",        Validation::TIME,       FALSE],
+        'Test Time 4'=>    ["10:55",        Validation::TIME,       TRUE],
+        'Test Time 5'=>    ["22:30",        Validation::TIME,       TRUE],
             
         ];
     }
