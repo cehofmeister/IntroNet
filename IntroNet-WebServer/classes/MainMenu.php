@@ -19,7 +19,7 @@ class MainMenu extends Menu {
      * @param createAdminMenu This is the create admin menu for the page
      */
     private function createAdminMenu(){
-        $this->addLink("Control Panal", "ControlPanal");
+        $this->addLink("Control Panel", "ControlPanel");
         
         $conferenceMenu = new Menu();
         $conferenceMenu->addLink("New Conference", "NewConference");

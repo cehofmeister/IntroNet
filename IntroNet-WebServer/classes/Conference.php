@@ -5,7 +5,7 @@
  *@property int $conference_id This is the conference id in which it has set of events
  * @property string $conference_name This is the name of the conference
  * @property date $registration_start_date This is the start date of the registrations
- * @property date $registeration_deadline_date This is the deadlines for the registrations
+ * @property date $registration_deadline_date This is the deadlines for the registrations
  * @property time $registration_start_time This is the start time of the registrations
  * @propertuy time $registration_deadline_time ths is the end_time of the registrations
  * 
@@ -15,7 +15,7 @@ class Conference {
     public $conference_id;
     public $conference_name;
     public $registration_start_date;
-    public $registeration_deadline_date;
+    public $registration_deadline_date;
     public $registration_start_time;
     public $registration_deadline_time;
 

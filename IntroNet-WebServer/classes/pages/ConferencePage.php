@@ -2,7 +2,7 @@
 
 /**
  * This is a webpage for Conference
- *  @property Conference $conference The confernce object to be used in the page
+ *  @property Conference $conference The conference object to be used in the page
  * 
  */
 class ConferencePage extends Page {
@@ -40,7 +40,7 @@ class ConferencePage extends Page {
                     <dt>Registration Start Date</dt>
                     <dd>" . $this->conference->registration_start_date . "</dd></br>
                     <dt>Registration Start Time</dt>
-                    <dd>" . $this->conference->registeration_deadline_date . "</dd></br>
+                    <dd>" . $this->conference->registration_deadline_date . "</dd></br>
                     <dt>Registration End Date</dt>
                     <dd>" . $this->conference->registration_start_time . "</dd></br>
                     <dt>Registration End Time</dt>

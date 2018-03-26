@@ -60,7 +60,7 @@ switch ($data["do"]) {
         //$submenu->addLink("Send Email Invitation", "?page=Event&event=" . $this->event->event_id . "&subpage=send", $subPage == 'send');
         //$submenu->addSplitter();
         $participants = $this->event->getNumberOfParticipants();
-        $missing = $participants - $this->event->getNumberOfParticipantion();
+        $missing = $participants - $this->event->getNumberOfParticipation();
         $submenu->addLink("Show All Participants", "?page=Event&event=" . $this->event->event_id . "&subpage=participants", $subPage == 'participants', false, $participants);
         //$submenu->addLink("Show Missing Participants", "#", false, false, $missing);
         //$submenu->addLink("Show Event Attendances", "#", false, false, 10);

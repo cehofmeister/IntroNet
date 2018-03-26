@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Description of ControlPanalPage
+ * Description of ControlPanelPage
  *
  * @author hussam
  */
-class ControlPanalPage extends Page {
+class ControlPanelPage extends Page {
     const UserType = "Planner";
     protected function build(\PageBody &$body, \SubMenu &$submenu) {
         $events = Event::getEvents("where TIMESTAMP(`startDate`,`startTime`) > now() order by startDate, startTime LIMIT 0 , 4");
@@ -13,11 +13,11 @@ class ControlPanalPage extends Page {
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/circliful/0.1.5/css/jquery.circliful.min.css" >
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/circliful/0.1.5/js/jquery.circliful.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.1.0/jquery.countdown.min.js"></script>
-                <div class="ControlPanal">
+                <div class="ControlPanel">
                 ';
         foreach ($events as $key => $event) {
             $participants=$event->getNumberOfConferenceParticipant();
-            $participantion=$event->getNumberOfParticipantion()/$participants*100;
+            $participation=$event->getNumberOfParticipation()/$participants*100;
             $html .= '
                 <div class="col-md-3" style="text-align: center;">
                     <div class="well">
@@ -25,7 +25,7 @@ class ControlPanalPage extends Page {
                         '.$event->getStartDay().'
                     </div>
                     <div class="row">
-                        <div class="circliful" data-percent="'.$participantion.'" data-text="'.$participants.'" style="margin: auto;"></div>
+                        <div class="circliful" data-percent="'.$participation.'" data-text="'.$participants.'" style="margin: auto;"></div>
                     </div>
                     <div class="row">
                         <div class="timer" data-date="'.$event->getStartDate().' '.$event->getStartTime().'"></div>

@@ -30,12 +30,12 @@ class Table {
     }
     /**
      * This is the function for meeting
-     * @param meething $round
-     * @param meething $p1
-     * @param meething $p2
-     * @param meething $p3
+     * @param meeting $round
+     * @param meeting $p1
+     * @param meeting $p2
+     * @param meeting $p3
      */
-    public function meething($round,$p1,$p2,$p3=FALSE) {
+    public function meeting($round,$p1,$p2,$p3=FALSE) {
         if($p3)
             $this->rounds[$round]=array($p1,$p2,$p3);
         else

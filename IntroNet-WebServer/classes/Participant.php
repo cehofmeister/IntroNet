@@ -120,7 +120,7 @@ class Participant extends User {
     }
  /**
   * 
-  * @param setInvitation $invitation this fiunction helps in creating invitation for the participant
+  * @param setInvitation $invitation this function helps in creating invitation for the participant
   * @return participant returns the participant to which the email was sent
   */
     public function setInvitation($invitation){

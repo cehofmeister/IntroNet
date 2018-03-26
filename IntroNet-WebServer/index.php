@@ -71,7 +71,7 @@ function main($debug_mode) {
     if (isset($_GET["logout"])) {
         session_destroy();
         login();
-        //echo 'Loged out';
+        //echo 'Logged out';
     }
 
 //    require_once './classes/MainMenu.php';

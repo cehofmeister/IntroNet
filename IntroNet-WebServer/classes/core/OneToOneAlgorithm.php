@@ -99,10 +99,10 @@ class OneToOneAlgorithm {
                 
                 if( $odd && $oddLocation==$key)
                    //$meeting[]= array($setA[$key],$setB[$key],$odd);
-                    $tables[$key]->meething ($round, $setA[$key], $setB[$key], $odd);
+                    $tables[$key]->meeting ($round, $setA[$key], $setB[$key], $odd);
                 else 
                     //$meeting[]= array($setA[$key],$setB[$key]);
-                    $tables[$key]->meething ($round, $setA[$key], $setB[$key]);
+                    $tables[$key]->meeting ($round, $setA[$key], $setB[$key]);
             }
             
             //$schedule[]=$meeting;

@@ -21,10 +21,10 @@ class LoginPage extends Page {
             // save user data
             $_SESSION['user']=serialize($user);
             
-            // redirct the user to the home page
+            // redirect the user to the home page
             $host  = $_SERVER['HTTP_HOST'];
             $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-            $extra = 'index.php?page=ControlPanal';
+            $extra = 'index.php?page=ControlPanel';
             header("Location: http://$host$uri/$extra");
             exit;
         }

@@ -6,7 +6,7 @@
  * This class is the superclass of every webpage
  * @property String UserType Type of user (User/Planner/Participant)
  * @property PageBody body The body of the page
- * @property string[] $keywords This contatins the keywords in the page
+ * @property string[] $keywords This contains the keywords in the page
  * @property string $description Contains the description of the page
  * @property string $center_width Contains the center_width of the page
  * @property string $body Contains the body of the page
@@ -15,7 +15,7 @@
  * @property string $pageName Contains the name of the page
   * @property string $pageTitle Contains the title of the page
  * @property string $user Human user of the page
- * @property string $angularjs shoud include $angularjs? (TRUE/FALSE)
+ * @property string $angularjs should include $angularjs? (TRUE/FALSE)
  *  @property string $css list of css files
  *  @property string $js list of js files
  */
@@ -35,7 +35,7 @@ abstract class Page {
     protected $pageName;          // the page name appears next to the page title
     private static $pageTitle;         // page title that appears on the page tab
     protected $user;              // the human user of the page
-    private $angularjs;         // shoud include $angularjs? (TRUE/FALSE)
+    private $angularjs;         // should include $angularjs? (TRUE/FALSE)
     private $css;               // list of css files
     private $js;                // list of js files
     

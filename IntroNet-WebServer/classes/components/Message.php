@@ -16,7 +16,7 @@ class Message extends Component {
     const WARNING = 'warning';
     const DANGER = 'danger';
 /**
- * This function can create the message content and type that has to be sent to theparticipant
+ * This function can create the message content and type that has to be sent to the participant
  * @param _construct $content Content for the message in the invitation
  * @param _construct $messageType Type of the message to be sent
  */

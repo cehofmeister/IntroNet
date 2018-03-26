@@ -5,13 +5,13 @@ require_once './classes/components/CustomHTML.php';
 require_once './classes/components/Message.php';
 require_once './classes/components/Form.php';
 
-class OrginizeTable extends Page {
+class OrganizeTable extends Page {
     const UserType = "Planner";
     protected function build(PageBody &$body, SubMenu &$submenu) {
-        $this->pageName = "OrginizeTable";
+        $this->pageName = "OrganizeTable";
         
         
-        $form = new Form("OrginizeTable");
+        $form = new Form("OrganizeTable");
         
         
         $form->addInput(Input::selectInput("event_name", "Event Name", array("Event1", "Event2")));

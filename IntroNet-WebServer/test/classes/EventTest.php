@@ -148,10 +148,10 @@ class EventTest extends TestCase {
     }
 
     /**
-     * @covers Event::getNumberOfParticipantion
-     * @todo   Implement testGetNumberOfParticipantion().
+     * @covers Event::getNumberOfParticipation
+     * @todo   Implement testGetNumberOfParticipation().
      */
-    public function testGetNumberOfParticipantion() {
+    public function testGetNumberOfParticipation() {
         // Remove the following lines when you implement this test.
        /* $this->markTestIncomplete(
                 'This test has not been implemented yet.'
