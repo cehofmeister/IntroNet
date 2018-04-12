@@ -34,7 +34,13 @@ class NewEventPage extends Page {
             if ($eventLength != "")
                 $rounds = ((int) $eventLength) / ((int) $session);
 
-
+        /*echo("'{$data["eventName"]}'"."'{$data["eventStartTime"]}'"."'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventStartDate"])))."'".
+                    "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventEndDate"])))."'",
+                    "'{$data["eventEndTime"]}'","rounds"        => $rounds,
+                    "roundLength"   => $session,
+                    "eventLength"   => $eventLength,
+                    "type"          => ($data["typeOfEvent"] == "One to One" ? 1 : 2),
+                    "conference_id" => $data["conference"])*/
         $event_id = Database::insert("Event", array(
                     "Event_name"    => "'{$data["eventName"]}'",
                     "startTime"     => "'{$data["eventStartTime"]}'",
@@ -45,9 +51,11 @@ class NewEventPage extends Page {
                     "roundLength"   => $session,
                     "eventLength"   => $eventLength,
                     "type"          => ($data["typeOfEvent"] == "One to One" ? 1 : 2),
-                    "conference_id" => $data["conference"]
+                    "event_conference_id" => $data["conference"],
+                    "meeting_rounds"=> "3",
+                    "poster_rounds" => "4"
 
-                        ), "Event_id");
+                        ));
 
         if ($event_id) {
             if ($data["typeOfEvent"] == "One to Many") {
@@ -99,7 +107,7 @@ class NewEventPage extends Page {
                     Input::dateInput("eventStartDate", "Event Start Date", "", TRUE),
                     Input::timeInput("eventStartTime", "Event Start Time", "", TRUE),
                     Input::dateInput("eventEndDate", "Event End Date", "", TRUE),
-                    Input::timeInput("eventStartTime", "Event End Time", "", TRUE)
+                    Input::timeInput("eventEndTime", "Event End Time", "", TRUE)
         )));
 
         $posters = Input::tokenInput("posters", "Posters");
