@@ -36,14 +36,18 @@ class NewEventPage extends Page {
 
 
         $event_id = Database::insert("Event", array(
-                    "name"          => "'{$data["eventName"]}'",
-                    "startDate"     => "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventDay"])))."'",
-                    "startTime"     => "'{$data["eventTime"]}'",
-                    "type"          => ($data["typeOfEvent"] == "One to One" ? 1 : 2),
-                    "conference_id" => $data["conference"],
+                    "Event_name"    => "'{$data["eventName"]}'",
+                    "startTime"     => "'{$data["eventStartTime"]}'",
+                    "startDate"     => "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventStartDate"])))."'",
+                    "endDate"       => "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventEndDate"])))."'",
+                    "endTime"       => "'{$data["eventEndTime"]}'",
                     "rounds"        => $rounds,
-                    "roundLength"   => $session
-                        ), "event_id");
+                    "roundLength"   => $session,
+                    "eventLength"   => $eventLength,
+                    "type"          => ($data["typeOfEvent"] == "One to One" ? 1 : 2),
+                    "conference_id" => $data["conference"]
+
+                        ), "Event_id");
 
         if ($event_id) {
             if ($data["typeOfEvent"] == "One to Many") {
@@ -92,8 +96,10 @@ class NewEventPage extends Page {
 
 
         $form->addInput(Input::createGroupInput(array(
-                    Input::dateInput("eventDay", "Event Date", "", TRUE),
-                    Input::timeInput("eventTime", "Event Start Time", "", TRUE)
+                    Input::dateInput("eventStartDate", "Event Start Date", "", TRUE),
+                    Input::timeInput("eventStartTime", "Event Start Time", "", TRUE),
+                    Input::dateInput("eventEndDate", "Event End Date", "", TRUE),
+                    Input::timeInput("eventStartTime", "Event End Time", "", TRUE)
         )));
 
         $posters = Input::tokenInput("posters", "Posters");

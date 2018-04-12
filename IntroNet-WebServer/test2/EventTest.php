@@ -3,6 +3,7 @@
 require __DIR__.'/../vendor/autoload.php';
 require __DIR__.'/../autoload.php';
 
+use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\Remote\WebDriverCapabilityType;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
@@ -21,26 +22,26 @@ class EventTest extends TestCase {
     protected $webDriver;
 
     public function setUp() {
-//        $capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'firefox');
-//        $this->webDriver = RemoteWebDriver::create('http://localhost:4444/wd/hub', $capabilities);
+        $capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'chrome');
+        $this->webDriver = RemoteWebDriver::create('http://localhost:5555/wd/hub', $capabilities);
     }
 
     public function tearDown() {
         //$this->webDriver->close();
     }
-    
+
     public static function setUpBeforeClass(){
         //xdebug_get_code_coverage();
-        $capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'firefox');
-        self::$webDriver2 = RemoteWebDriver::create('http://localhost:4444/wd/hub', $capabilities);
+        $capabilities = array(WebDriverCapabilityType::BROWSER_NAME => 'chrome');
+        self::$webDriver2 = RemoteWebDriver::create('http://localhost:5555/wd/hub', $capabilities);
     }
-    
+
     public static function tearDownAfterClass(){
         //if(isset(self::$webDriver2))
         self::$webDriver2->close();
         //xdebug_get_code_coverage();
     }
-    
+
 
     protected $url = 'http://localhost:8000/';
     static $event;
@@ -51,27 +52,27 @@ class EventTest extends TestCase {
      */
     public function testNewEventPage() {
         $this->webDriver = self::$webDriver2;
-        
+
         // 1- login if needed
         if (count($this->webDriver->findElements(WebDriverBy::linkText("hussam"))) === 0)
             LoginTest::login($this, $this->webDriver);
         //$this->assertContains('IntroNet', $this->webDriver->getTitle());
-        
+
         // 2- go to new event page
         $element = $this->webDriver->findElement(WebDriverBy::linkText('Events'));
         $element->click();
         $element = $this->webDriver->findElement(WebDriverBy::linkText('New Event'));
         $element->click();
-        
+
         // should go to the new event page
-        $this->assertContains('http://localhost:8000/index.php?page=NewEvent', $this->webDriver->getCurrentURL()); 
-    
+        $this->assertContains('http://localhost:8000/index.php?page=NewEvent', $this->webDriver->getCurrentURL());
+
         //var_dump($event);
         //return array($this->webDriver,  $event);
         //self::$event=$event;
         self::$webDriver2= $this->webDriver;
     }
-    
+
     /**
      * @dataProvider dataSet
      * @depends testNewEventPage
@@ -83,7 +84,7 @@ class EventTest extends TestCase {
         $webDriver = self::$webDriver2;
 //        var_dump($data);
 //        list($webDriver,$event) = $data;
-        
+
         var_dump($event);
         //var_dump($webDriver);
        //$webDriver=$this->webDriver;
@@ -95,12 +96,12 @@ class EventTest extends TestCase {
         //2- select Type (select "One to Many")
         $element = $webDriver->findElement(WebDriverBy::id('typeOfEvent'))->findElements( WebDriverBy::tagName('option') );
         $element[$event['typeOfEvent']]->click();
-        
+
         //3- enter number of rounds
         $element = $webDriver->findElement(WebDriverBy::id('numberOfRounds'));
         $element->click();
         $webDriver->getKeyboard()->sendKeys($event['numberOfRounds']);
-        
+
         //4- enter time Of Sessions
         $element = $webDriver->findElement(WebDriverBy::id('timeOfSessions'));
         $element->click();
@@ -110,17 +111,17 @@ class EventTest extends TestCase {
         $element = $webDriver->findElement(WebDriverBy::id('lengthOfEntireEvent'));
         $element->click();
         $webDriver->getKeyboard()->sendKeys($event['lengthOfEntireEvent']);
-        
+
         //6- enter eventDay
         $element = $webDriver->findElement(WebDriverBy::id('eventDay'));
         $element->click();
         $webDriver->getKeyboard()->sendKeys($event['eventDay']);
-        
+
         //7- enter eventTime
         $element = $webDriver->findElement(WebDriverBy::id('eventTime'));
         $element->click();
         $webDriver->getKeyboard()->sendKeys($event['eventTime']);
-        
+
         //8- posters-tokenfield
         $element = $webDriver->findElement(WebDriverBy::id('posters-tokenfield'));
         $element->click();
@@ -140,14 +141,14 @@ class EventTest extends TestCase {
         $webDriver->getKeyboard()->pressKey(WebDriverKeys::ENTER);
         $webDriver->getKeyboard()->sendKeys('poster 8');
         $webDriver->getKeyboard()->pressKey(WebDriverKeys::ENTER);
-        
+
         //9- submit
         $element = $webDriver->findElement(WebDriverBy::cssSelector('input[type="submit"]'));
         $element->click();
-        
-        $this->assertContains('http://localhost:8000/index.php?page=NewEvent', $webDriver->getCurrentURL()); 
+
+        $this->assertContains('http://localhost:8000/index.php?page=NewEvent', $webDriver->getCurrentURL());
     }
-    
+
     function dataSet(){
         // set of test cases
         $events=[];
@@ -163,11 +164,11 @@ class EventTest extends TestCase {
             'eventTime'=>'9:25',
             'posters'=>['poster 1','poster 2', 'poster 3']
         ]];
-        
+
         // noNameEvent test case
         $events['noNameEvent']= $events['goodEvent'];
         $events['noNameEvent']['data']['eventName']='bad';
-        
+
         return $events;
     }
 

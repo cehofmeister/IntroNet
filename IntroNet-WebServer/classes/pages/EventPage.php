@@ -14,23 +14,23 @@ class EventPage extends Page {
     public function callBack($data, $action, PageBody &$body) {
         if (array_key_exists("do", $data))
             {
-switch ($data["do"]) {
-                case "create": // create a new event
+                switch ($data["do"]) {
+                    case "create": // create a new event
 
-                    $this->event = new stdClass(); // for testing - should be Event class
-                    $this->event->name = $data['eventName'];
+                        $this->event = new stdClass(); // for testing - should be Event class
+                        $this->event->name = $data['eventName'];
 
-                    // save event
-                    $this->event->id = Database::insert("Event", $this->event);
-                    $body->addToTop(new Message("Event was created", Message::SUCCESS));
-                    break;
-                case "update": // update an event
-                    $values = "name='" . Validation::validate($data['eventName'], Validation::NAME) . "'";
-                    $values .= ",startDate='" . Validation::validate($data['startDate'], Validation::DATE) . "'";
-                    $values .= ",startTime='" . Validation::validate($data['startTime'], Validation::TIME) . "'";
-                    Database::update("Event", $values, "event_id=" . $data['id']);
-                    $body->addToTop(new Message("Event was Updated", Message::SUCCESS));
-                    break;
+                        // save event
+                        $this->event->id = Database::insert("Event", $this->event);
+                        $body->addToTop(new Message("Event was created", Message::SUCCESS));
+                        break;
+                    case "update": // update an event
+                        $values = "name='" . Validation::validate($data['eventName'], Validation::NAME) . "'";
+                        $values .= ",startDate='" . Validation::validate($data['startDate'], Validation::DATE) . "'";
+                        $values .= ",startTime='" . Validation::validate($data['startTime'], Validation::TIME) . "'";
+                        Database::update("Event", $values, "event_id=" . $data['id']);
+                        $body->addToTop(new Message("Event was Updated", Message::SUCCESS));
+                        break;
             }
 }
     }

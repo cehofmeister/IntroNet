@@ -88,7 +88,7 @@ class Database {
      * @return object The object of type name else retuns false if it doesn't exists in database
      */
     public static function getObject($name,$where) {
-        //session_start();
+        //  session_start();
         $connection = self::connect();
         $STH = $connection->query("Select * FROM ".$name." WHERE ".$where);
         if($STH){

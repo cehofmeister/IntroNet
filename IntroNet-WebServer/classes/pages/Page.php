@@ -1,6 +1,6 @@
 <?php
-//require_once './classes/components/Component.php';
-//require_once './classes/components/Form.php';
+require_once './classes/components/Component.php';
+require_once './classes/components/Form.php';
 
 /**
  * This class is the superclass of every webpage
@@ -306,7 +306,7 @@ class PageBody {
     }
 /**
  * 
- * @param Component $component This add the component to the bottom
+ * @param Component $componet This add the component to the bottom
  */
     function addToBottom(Component $componet) {
         $this->components[PageBody::BOTTOM][] = $componet;

@@ -11,6 +11,30 @@ class ConferencePage extends Page {
 
     private $conference;
 
+    public function callBack($data, $action, PageBody &$body) {
+        if (array_key_exists("do", $data))
+        {
+            switch ($data["do"]) {
+                case "create": // create a new event
+
+                    $this->conference = new stdClass(); // for testing - should be Event class
+                    $this->conference->name = $data['conference_name'];
+
+                    // save event
+                    $this->conference->id = Database::insert("conference", $this->conference);
+                    $body->addToTop(new Message("Event was created", Message::SUCCESS));
+                    break;
+                case "update": // update an event
+                    $values = "name='" . Validation::validate($data['conference_name'], Validation::NAME) . "'";
+                    $values .= ",startDate='" . Validation::validate($data['startDate'], Validation::DATE) . "'";
+                    $values .= ",startTime='" . Validation::validate($data['startTime'], Validation::TIME) . "'";
+                    Database::update("Event", $values, "event_id=" . $data['id']);
+                    $body->addToTop(new Message("Event was Updated", Message::SUCCESS));
+                    break;
+            }
+        }
+    }
+
     protected function build(\PageBody &$body, \SubMenu &$submenu) {
         // get event
         if (isset($_GET['conference'])) {
