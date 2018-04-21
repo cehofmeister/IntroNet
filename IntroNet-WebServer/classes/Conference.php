@@ -111,12 +111,12 @@ WHERE Participant.conference_id =$id AND Organisation.organisation_id = Particip
         return $events;
     }
     /**
-     * This function gets the list of all organizations
-     * @param getOrganizations 
-     * @return organizations
+     * This function gets the list of all organisations
+     * @param getOrganisations
+     * @return organisations
      */
     public function getOrganisations() {
-        $organisations = Database::getObjects("Organisation","Where conference_id=".$this->conference_id);
+        $organisations = Database::getObjects("Organisation","Where org_conference=".$this->conference_id);
         return $organisations;
     }
     /**

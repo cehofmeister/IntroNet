@@ -6,22 +6,31 @@ require_once 'User.php';
 /**
  * Description of Participant
  *@property String $name This is the full name of the participant
+ * @property String $participant_id ID of the Participant
  * @property String $fname First name of the Participant
  * @property String $lname Last name of the participant
  * @property int $phone contact number of the participant
  * @property String $preferences preferences of the participant
- * @property int $id ID of the participant
+ * @property String $email Email of the Participant
+ * @property int $password password of the participant
+ * @property String $organisation organisation to which the participant belongs to
+ * @property String $biography bio of the participant
+ * @property String $icebreaker_question ice breaker of the participant
  * @property int $weight Describes the weight of the participant based on the priority
- * @property String $organization organization to which the participant belongs to
  */
 class Participant extends User {
+    public $participant_id;
     public $fname;
     public $lname;
-    public $phone;  
+    public $phone;
+    public $preferences;
     public $email;
-    public $id;
-    public $weight;
+    public $password;
     public $organisation;
+    public $biography;
+    public $icebreaker_question;
+    public $weight;
+
 /**
  * @param _construct $id Checks whether the id is null or not
  * @param _construct $preferences Checks whether the preferences are null or not
@@ -100,20 +109,24 @@ class Participant extends User {
  *@param addParticipant $fname This is the first name of the participant
    *@param addParticipant $lname Last name of the participant
  * @param addParticipant $email email id of the participant
- * @param addParticipant $organisation organization of the participant
+ * @param addParticipant $organisation organisation of the participant
  * @param addParticipant $disability disability status of the participant
  * @param addParticipant $vip whether the participant is VIP or not
  * @param addParticipant $phone contact number of the participant
      */
-    public static function addParticipant($conference,$fname,$lname,$email,$organisation,$disability,$vip,$phone="NULL"){
+    public static function addParticipant($conference,$fname,$password,$lname,$email,$organisation,$biography,$icebreaker_question,$disability,$weight,$phone="NULL"){
         $participants = Database::insert("Participant",array(
             "fname"=>"'$fname'",
             "lname"=>"'$lname'",
+            "phone"=>"'$phone'",
             "email"=>"'$email'",
-            "conference_id"=>$conference,
+            "password"=>"'$password'",
+            //"conference_id"=>$conference,
             "organisation"=>$organisation,
+            "biography"=>"'$biography'",
             "disabled"=>(int) $disability,
-            //"phone"=>$phone
+            "icebreaker_question"=>"'icebreaker_question'",
+            "weight"=>"'$weight'",
         ));
         //return $participants;
        // var_dump(func_get_args());
@@ -124,7 +137,7 @@ class Participant extends User {
   * @return participant returns the participant to which the email was sent
   */
     public function setInvitation($invitation){
-        Database::update("Participant", "invitation='$invitation'", " participant_id=".$this->id);
+        Database::update("Participant", "invitation='$invitation'", " participant_id=".$this->participant_id);
     } 
     /**
      * 

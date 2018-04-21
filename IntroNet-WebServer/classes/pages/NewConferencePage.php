@@ -24,7 +24,11 @@ class NewConferencePage extends Page {
             "registration_start_time"     => "'{$data["eventStartTime"]}'",
             "registration_deadline_date"  => "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventDeadline"])))."'",
             "registration_deadline_time"  => "'{$data["eventDeadlineTime"]}'",
+        ));
 
+        $organisation_id = Database::insert("Organisation", array(
+            "name" => "'{$data["Organisations"]}'",
+            "org_conference" => $conference_id
         ));
 
         $body->addToTop(new Message("<h3>Conference was created</h3>"
@@ -49,7 +53,7 @@ class NewConferencePage extends Page {
             Input::timeInput("eventDeadlineTime","Registration Deadline Time",'', True)
             ))); 
         
-        $form->addInput(Input::tokenInput("organizations","Organizations", True));
+        $form->addInput(Input::tokenInput("organisations","Organisations", True));
         $body->addToCenter($form);
 
     }

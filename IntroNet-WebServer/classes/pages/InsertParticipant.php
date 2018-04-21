@@ -8,13 +8,13 @@ class InsertParticipant extends Page {
             $lname = Validation::validate($data["lastName"], Validation::NAME);
             $phone = $data['contactNo'];
             $email = Validation::validate($data["email"], Validation::EMAIL);
-            $password = Validation::validate($data["lastName"], Validation::PASSWORD);
+            $password = Validation::validate($data["password"], Validation::PASSWORD);
             $organisation= $data['organisation'];
-            $biography = $data['bio'];
-            $iceBreaker = $data['iceBreaker'];
+            $biography = "";
+            $icebreaker_question = "";
             //$disability = isset($data['disability']);
-            $vip = isset($data['vip']);
-            Participant::addParticipant($fname, $lname, $phone, $email, $organisation, $vip);
+            $weight = isset($data['vip']);
+            Participant::addParticipant($fname, $lname, $phone, $email, $password, $organisation, $biography, $icebreaker_question, $weight);
        }
         //
         //var_dump($data);
@@ -54,7 +54,7 @@ class InsertParticipant extends Page {
             Input::checkBox("vip", "VIP")
         )));
         $form->addInput(Input::hiddenInput("insert", "true"));
-        $form->addInput(Input::hiddenInput("conference", $conference->id));
+        $form->addInput(Input::hiddenInput("conference", $conference->conference_id));
     
         
     

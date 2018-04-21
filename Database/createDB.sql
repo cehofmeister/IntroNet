@@ -99,7 +99,8 @@ CREATE TABLE `Meeting_table` (
 CREATE TABLE `Organisation` (
   `organisation_id` int(10) UNSIGNED NOT NULL,
   `name` varchar(45) DEFAULT NULL,
-  `org_event` int(10) UNSIGNED DEFAULT NULL
+  `org_event` int(10) UNSIGNED DEFAULT NULL,
+  `conference_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
