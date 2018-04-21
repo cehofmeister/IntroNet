@@ -66,13 +66,13 @@ class RegistrationPage extends Page {
         $form = new Form("registration");
 
         foreach ($events as $key => $event) {
-            $section = $form->newSection(Input::checkBox("event" . $event->event_id, "") . $event->name . "  <small>".$event->getStartDay()."  From $event->startTime to ".$event->getEndTime()."</small>");
+            $section = $form->newSection(Input::checkBox("event" . $event->Event_id, "") . $event->name . "  <small>".$event->getStartDay()."  From $event->startTime to ".$event->getEndTime()."</small>");
             if ($event->type == 1) // one to one
-                $input = Input::checklist("event" . $event->event_id . "list", "Who you want to meet?", $organisations);
+                $input = Input::checklist("event" . $event->Event_id . "list", "Who you want to meet?", $organisations);
             else if ($event->type == 2) // one to many
-                $input = Input::checklist("event" . $event->event_id . "list", "Preferences", $event->getPosters() );
+                $input = Input::checklist("event" . $event->Event_id . "list", "Preferences", $event->getPosters() );
 
-            $input->showOn = "event" . $event->event_id;
+            $input->showOn = "event" . $event->Event_id;
             $section->addInput($input);
         }
 
@@ -143,11 +143,11 @@ class RegistrationPage extends Page {
                 foreach ($events as $event) {
                     $ok=TRUE;
                     $registered = $registered || $event->isRegistered($participant->id);
-                    if(key_exists("event".$event->event_id, $data)){
-                        //echo $event->event_id;
+                    if(key_exists("event".$event->Event_id, $data)){
+                        //echo $event->Event_id;
                         $preferences=array();
-                        if(key_exists("event".$event->event_id."list", $data)){
-                            $preferences=  $data["event".$event->event_id."list"];
+                        if(key_exists("event".$event->Event_id."list", $data)){
+                            $preferences=  $data["event".$event->Event_id."list"];
                         }
                         //echo 'p=';
                         //var_dump($preferences);

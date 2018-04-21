@@ -18,17 +18,17 @@ class EventPage extends Page {
                     case "create": // create a new event
 
                         $this->event = new stdClass(); // for testing - should be Event class
-                        $this->event->name = $data['eventName'];
+                        $this->event->name = $data['Event_Name'];
 
                         // save event
                         $this->event->id = Database::insert("Event", $this->event);
                         $body->addToTop(new Message("Event was created", Message::SUCCESS));
                         break;
                     case "update": // update an event
-                        $values = "name='" . Validation::validate($data['eventName'], Validation::NAME) . "'";
+                        $values = "name='" . Validation::validate($data['Event_Name'], Validation::NAME) . "'";
                         $values .= ",startDate='" . Validation::validate($data['startDate'], Validation::DATE) . "'";
                         $values .= ",startTime='" . Validation::validate($data['startTime'], Validation::TIME) . "'";
-                        Database::update("Event", $values, "event_id=" . $data['id']);
+                        Database::update("Event", $values, "Event_id=" . $data['id']);
                         $body->addToTop(new Message("Event was Updated", Message::SUCCESS));
                         break;
             }
@@ -54,14 +54,14 @@ class EventPage extends Page {
         $this->pageName = $this->event->name;
 
 
-        $submenu->addLink("Event Details", "?page=Event&event=" . $this->event->event_id, $subPage == '');
-        $submenu->addLink("Update Event", "?page=Event&event=" . $this->event->event_id . "&subpage=update", $subPage == 'update');
+        $submenu->addLink("Event Details", "?page=Event&event=" . $this->event->Event_id, $subPage == '');
+        $submenu->addLink("Update Event", "?page=Event&event=" . $this->event->Event_id . "&subpage=update", $subPage == 'update');
         $submenu->addSplitter();
-        //$submenu->addLink("Send Email Invitation", "?page=Event&event=" . $this->event->event_id . "&subpage=send", $subPage == 'send');
+        //$submenu->addLink("Send Email Invitation", "?page=Event&event=" . $this->event->Event_id . "&subpage=send", $subPage == 'send');
         //$submenu->addSplitter();
         $participants = $this->event->getNumberOfParticipants();
         $missing = $participants - $this->event->getNumberOfParticipation();
-        $submenu->addLink("Show All Participants", "?page=Event&event=" . $this->event->event_id . "&subpage=participants", $subPage == 'participants', false, $participants);
+        $submenu->addLink("Show All Participants", "?page=Event&event=" . $this->event->Event_id . "&subpage=participants", $subPage == 'participants', false, $participants);
         //$submenu->addLink("Show Missing Participants", "#", false, false, $missing);
         //$submenu->addLink("Show Event Attendances", "#", false, false, 10);
         //$submenu->addSplitter();
@@ -69,8 +69,8 @@ class EventPage extends Page {
         //$submenu->addLink("Send Schedule", "#");
         //$submenu->addLink("Start Timer", "#");
         if ($this->event->type == Event::ONETOONE) {
-            $submenu->addLink("Event Tables", "?page=Event&event=" . $this->event->event_id . "&subpage=EventTables", $subPage == 'EventTables', false, floor($participants / 2));
-            $submenu->addLink("Print Table Names", "?page=Event&event=" . $this->event->event_id . "&subpage=printTableNames", $subPage == 'printTableNames');
+            $submenu->addLink("Event Tables", "?page=Event&event=" . $this->event->Event_id . "&subpage=EventTables", $subPage == 'EventTables', false, floor($participants / 2));
+            $submenu->addLink("Print Table Names", "?page=Event&event=" . $this->event->Event_id . "&subpage=printTableNames", $subPage == 'printTableNames');
         }
         $submenu->addSplitter();
         $submenu->addDangerLink("Delete Event", "#");
@@ -105,7 +105,7 @@ class EventPage extends Page {
                 </dl>
             "));
         else if ($subPage == 'update') {
-            $form = new Form("Event&event=" . $this->event->event_id . "&subpage=update");
+            $form = new Form("Event&event=" . $this->event->Event_id . "&subpage=update");
             $form->addInput(Input::textInput("eventName", "Event Name", $this->event->name, TRUE));
             $form->addInput(Input::createGroupInput(array(
                         Input::dateInput("startDate", "Start Date", $this->event->getStartDate(), TRUE),
@@ -119,7 +119,7 @@ class EventPage extends Page {
 //                Input::textInput("lengthOfEntireEvent","Length of The Entire Event","",True),
 //            )));
 
-            $form->addInput(Input::hiddenInput("id", $this->event->event_id));
+            $form->addInput(Input::hiddenInput("id", $this->event->Event_id));
             $form->addInput(Input::hiddenInput("do", "update"));
             $body->addToCenter($form);
         } else if ($subPage == 'send') {
@@ -138,7 +138,7 @@ class EventPage extends Page {
         } elseif ($subPage == "EventTables") {
 
             /* @var  $tables Table[]  */
-            $tables = Database::getObjects("Table", "Where event_id=" . $this->event->event_id);
+            $tables = Database::getObjects("Table", "Where Event_id=" . $this->event->Event_id);
             //var_dump($tables);
             $form = new Form("");
             for ($i = 0; $i < floor($participants / 2); $i++) {
@@ -162,7 +162,7 @@ class EventPage extends Page {
     function printTableNames(PageBody &$body,$participants) {
 
         /* @var  $tables Table[]  */
-        $tables = Database::getObjects("Table", "Where event_id=" . $this->event->event_id);
+        $tables = Database::getObjects("Table", "Where Event_id=" . $this->event->Event_id);
         //var_dump($tables);
 
         for ($i = 0; $i < floor($participants / 2); $i++) {

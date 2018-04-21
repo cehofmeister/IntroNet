@@ -4,15 +4,17 @@ class InsertParticipant extends Page {
     public function callBack($data, $action, \PageBody &$body) {
         //$body->addToTop(new Message("Please complete all the details", Message::DANGER));
        if(isset($data['insert'])){
-            $conference = $data["conference"];
             $fname = Validation::validate($data["firstName"], Validation::NAME);
             $lname = Validation::validate($data["lastName"], Validation::NAME);
-            $email = Validation::validate($data["email"], Validation::EMAIL);
-            $organisation= $data['organisation'];
             $phone = $data['contactNo'];
-            $disability = isset($data['disability']);
+            $email = Validation::validate($data["email"], Validation::EMAIL);
+            $password = Validation::validate($data["lastName"], Validation::PASSWORD);
+            $organisation= $data['organisation'];
+            $biography = $data['bio'];
+            $iceBreaker = $data['iceBreaker'];
+            //$disability = isset($data['disability']);
             $vip = isset($data['vip']);
-            Participant::addParticipant($conference, $fname, $lname, $email, $organisation, $disability, $vip,$phone);
+            Participant::addParticipant($fname, $lname, $phone, $email, $organisation, $vip);
        }
         //
         //var_dump($data);

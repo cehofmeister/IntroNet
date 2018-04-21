@@ -8,6 +8,11 @@ class NewEventPage extends Page {
         $angularjs = TRUE;
     }
 
+    /**
+     * @param $data
+     * @param $action
+     * @param PageBody $body
+     */
     public function callBack($data, $action, \PageBody &$body) {
         //$body->addToTop(new Message("Please fill all the information", Message::DANGER));
         // get number of rounds  
@@ -34,14 +39,11 @@ class NewEventPage extends Page {
             if ($eventLength != "")
                 $rounds = ((int) $eventLength) / ((int) $session);
 
-        /*echo("'{$data["eventName"]}'"."'{$data["eventStartTime"]}'"."'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventStartDate"])))."'".
-                    "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventEndDate"])))."'",
-                    "'{$data["eventEndTime"]}'","rounds"        => $rounds,
-                    "roundLength"   => $session,
-                    "eventLength"   => $eventLength,
-                    "type"          => ($data["typeOfEvent"] == "One to One" ? 1 : 2),
-                    "conference_id" => $data["conference"])*/
-        $event_id = Database::insert("Event", array(
+        echo("'{$data["eventName"]}'"."'{$data["eventStartTime"]}'"."'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventStartDate"])))."'".
+                    "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventEndDate"])))."'");/*.
+                    "'{$data["eventEndTime"]}'".$rounds.$session.$eventLength.$data["typeOfEvent"] == "One to One" ? 1 : 2).$data["conference"]);
+*/
+        $Event_id = Database::insert("Event", array(
                     "Event_name"    => "'{$data["eventName"]}'",
                     "startTime"     => "'{$data["eventStartTime"]}'",
                     "startDate"     => "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventStartDate"])))."'",
@@ -57,13 +59,13 @@ class NewEventPage extends Page {
 
                         ));
 
-        if ($event_id) {
+        if ($Event_id) {
             if ($data["typeOfEvent"] == "One to Many") {
                 $posters = explode(",", $data["posters"]);
                 foreach ($posters as $poster) {
                     Database::insert("Poster", array(
                         "name"      => "'$poster'",
-                        "event_id"  => $event_id
+                        "Event_id"  => $Event_id
                     ));
                 }
             }
@@ -79,7 +81,7 @@ class NewEventPage extends Page {
             $minParticipant = $posterCount * $rounds;
         }
         $body->addToTop(new Message("<h3>Event was created</h3>minimum number of participants is $minParticipant "
-                . "<a href='?page=Event&event=$event_id'>Click Here to View Event's Details</a>", Message::SUCCESS));
+                . "<a href='?page=Event&event=$Event_id'>Click Here to View Event's Details</a>", Message::SUCCESS));
     }
 
     protected function build(PageBody &$body, SubMenu &$submenu) {

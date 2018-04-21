@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @property int $event_id This is the id for the event
- * @property string $name This is the name for the event
+ * @property int $Event_id This is the id for the event
+ * @property string $Event_name This is the name for the event
  * @property date $startDate This is the startDate for the event
  * @property time $startTime This is the start time for the event
  * @property date $endDate This is the end date for the event
@@ -11,12 +11,12 @@
  * @property int $roundLength This is the length of rounds for the event
  * @property int $eventLength This is the length of the entire event
  * @property string $type This is the type of event whether one-one or one-many
- * @property int $conference_id This is the conference_id to which this event belongs to 
+ * @property int $event_conference_id This is the conference_id to which this event belongs to
  * 
  */
 class Event {
-    public $event_id;
-    public $name;
+    public $Event_id;
+    public $Event_name;
     public $startDate;
     public $startTime;
     public $endDate;
@@ -25,7 +25,7 @@ class Event {
     public $roundLength;
     public $eventLength;
     public $type;
-    public $conference_id;
+    public $event_conference_id;
 
 
     const ONETOONE = 1;
@@ -37,13 +37,13 @@ class Event {
 //        $this->datetime=$datetime;
 //    }
     public function __construct(){
-        $this->id=  $this->event_id;
+        $this->id=  $this->Event_id;
         $this->eventLength = $this->rounds * $this->roundLength;
         $this->endTime = strtotime("+".$this->eventLength." minutes",strtotime($this->startTime));
     }
     /**
      * This function creates new event
-     * @param string $name This is the name of the event
+     * @param string $Event_name This is the name of the event
      * @param date $startDate this is the start date of the event
      * @param time $startTime this is the start time of the event
      * @param date $endDate this is the end date of the event
@@ -52,10 +52,10 @@ class Event {
      * @return \Event this returns the newly created event
      * 
      */
-    public static function create($name,$startDate,$startTime,$endDate,$endTime,$type) {
+    public static function create($Event_name,$startDate,$startTime,$endDate,$endTime,$type) {
         $event = new Event;
         try{
-            $event->name= Validation::validate($name, Validation::NAME);
+            $event->name= Validation::validate($Event_name, Validation::NAME);
             $event->startDate= Validation::validate($startDate, Validation::DATE);
             $event->startTime= Validation::validate($startTime, Validation::TIME);
             $event->endDate= Validation::validate($endDate, Validation::DATE);
@@ -70,12 +70,12 @@ class Event {
     
     public function getName()
     {
-        return $this->name;
+        return $this->Event_name;
     }
-    public function setName($name)
+    public function setName($Event_name)
     {
         try {
-            $this->name = Validation::validate($name, Validation::NAME);
+            $this->name = Validation::validate($Event_name, Validation::NAME);
         }  catch (Exception $e) {
             throw new Exception("invalid input",0,$e);
 //return "";
@@ -143,7 +143,7 @@ class Event {
      * @return int number of participants in the conference
      */
     public function getNumberOfConferenceParticipant(){
-        return Database::count("Participant", "WHERE conference_id=".$this->conference_id);
+        return Database::count("Participant", "WHERE conference_id=".$this->event_conference_id);
     }
      /**
  * This is the function which gets the total number of participants
@@ -151,7 +151,7 @@ class Event {
      * @return int total number of participants
      */
     public function getNumberOfParticipation(){
-        return Database::count("Registration", "WHERE event_id=".$this->event_id);
+        return Database::count("Registration", "WHERE Event_id=".$this->Event_id);
     }
 
     
@@ -162,7 +162,7 @@ class Event {
      * @return participant returns if the participants is registered, else returns null
      */
     public function isRegistered($participant_id){
-        return (bool) Database::count("Registration", "WHERE participant_id=$participant_id AND event_id=".$this->event_id);
+        return (bool) Database::count("Registration", "WHERE participant_id=$participant_id AND Event_id=".$this->Event_id);
     }
     
     public function isAttended($Participant)
@@ -188,12 +188,12 @@ class Event {
     public function getParticipants()
     {
         $participants = Database::getObjects("Participant", "", "
-SELECT * 
-FROM  Participant, Registration
-WHERE
-Registration.participant_id = Participant.participant_id
-AND
-Registration.event_id = ".$this->event_id);
+            SELECT * 
+            FROM  Participant, Registration
+            WHERE
+            Registration.participant_id = Participant.participant_id
+            AND
+            Registration.Event_id = ".$this->Event_id);
         return $participants;
     }
     /*
@@ -201,15 +201,15 @@ Registration.event_id = ".$this->event_id);
      * @return int returns the number of participants who are registered for the event.
      */
     public function getNumberOfParticipants(){
-        return Database::count("Participant",",Registration Where Participant.participant_id=Registration.participant_id AND event_id =".$this->event_id);
+        return Database::count("Participant",",Registration Where Participant.participant_id=Registration.participant_id AND Event_id =".$this->Event_id);
     }
 /**
  * @param string getConferenceName this function returns the names of all conferences
  * @return object returns the names of the conference
  */
     public function getConferenceName() {
-        $conference = Database::getObject("Conference","Conference_id=".$this->conference_id);
-        return $conference->name;
+        $conference = Database::getObject("Conference","conference_id=".$this->event_conference_id);
+        return $conference->conference_name;
     }
 
     /**
@@ -239,7 +239,7 @@ Registration.event_id = ".$this->event_id);
      */
     public function getPosters($options="") {
         /* @var $posters Poster[] */
-        $posters = Database::getObjects("Poster","WHERE Event_id= $this->event_id ".$options);
+        $posters = Database::getObjects("Poster","WHERE Event_id= $this->Event_id ".$options);
         //var_dump($posters);
         $numberOfParticipants = $this->getNumberOfParticipants();
         $numberOfPosters= count($posters);
@@ -255,14 +255,14 @@ Registration.event_id = ".$this->event_id);
      * @param int $Participant_id this is the participant id
      * @param string $preferences this is the preferences
      * @param string $icebreaker_question this is the ice breaker questions
-     * @param string $biography this is the bio graphy
+     * @param string $biography this is the biography
      * @return participant register the participant
      */
     public function register($Participant_id,$preferences,$icebreaker_question="NULL",$biography="NULL"){
         $ok=true;
         //var_dump("start=$ok");
         $ok= $ok && Database::insert("Registration",array(
-            "event_id"          =>  $this->event_id,
+            "Event_id"          =>  $this->Event_id,
             "participant_id"    =>  $Participant_id,
             "icebreaker_question"=> $icebreaker_question,
             "biography"         =>  $biography
@@ -271,7 +271,7 @@ Registration.event_id = ".$this->event_id);
         //var_dump($preferences);
         foreach ($preferences as $p) {
             $ok= $ok && Database::insert("Preference",array(
-                "event_id"          =>  $this->event_id,
+                "Event_id"          =>  $this->Event_id,
                 "participant_id"    =>  $Participant_id,
                 "preference"        =>  $p
             ));

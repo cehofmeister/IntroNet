@@ -47,7 +47,7 @@ SELECT *
 FROM Event, Registration
 WHERE 
 Registration.participant_id = Participant.participant_id
-AND Registration.event_id = Event.event_id
+AND Registration.Event_id = Event.Event_id
 AND Event.conference_id =$id
 
 )
@@ -62,7 +62,7 @@ SELECT *
 FROM Event, Schedule
 WHERE 
 Schedule.participant_id = Participant.participant_id
-AND Schedule.event_id = Event.event_id
+AND Schedule.Event_id = Event.Event_id
 AND Event.conference_id =$id
 
 )
@@ -98,7 +98,7 @@ WHERE Participant.conference_id =$id AND Organisation.organisation_id = Particip
     * @return Participants
     */
     public function getNumberOfScheduleParticipants(){
-        return Database::count("Participant",",Schedule,Event Where Schedule.participant_id = Participant.participant_id AND Schedule.event_id = Event.event_id AND  Event.conference_id =".$this->conference_id);
+        return Database::count("Participant",",Schedule,Event Where Schedule.participant_id = Participant.participant_id AND Schedule.Event_id = Event.Event_id AND  Event.conference_id =".$this->conference_id);
     }
     
     /**

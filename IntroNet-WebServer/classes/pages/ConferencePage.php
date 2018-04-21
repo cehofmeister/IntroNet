@@ -17,7 +17,7 @@ class ConferencePage extends Page {
             switch ($data["do"]) {
                 case "create": // create a new event
 
-                    $this->conference = new stdClass(); // for testing - should be Event class
+                    $this->conference = new stdClass(); // for testing - should be Conference class
                     $this->conference->name = $data['conference_name'];
 
                     // save event
@@ -28,8 +28,8 @@ class ConferencePage extends Page {
                     $values = "name='" . Validation::validate($data['conference_name'], Validation::NAME) . "'";
                     $values .= ",startDate='" . Validation::validate($data['startDate'], Validation::DATE) . "'";
                     $values .= ",startTime='" . Validation::validate($data['startTime'], Validation::TIME) . "'";
-                    Database::update("Event", $values, "event_id=" . $data['id']);
-                    $body->addToTop(new Message("Event was Updated", Message::SUCCESS));
+                    Database::update("Event", $values, "Event_id=" . $data['id']);
+                    $body->addToTop(new Message("Conference was Updated", Message::SUCCESS));
                     break;
             }
         }
@@ -193,7 +193,7 @@ class ConferencePage extends Page {
                             $schedule_id = FALSE;
 
                             $schedule_id = Database::insert("Schedule", array(
-                                        "event_id" => $event->event_id,
+                                        "Event_id" => $event->Event_id,
                                         "participant_id" => $participant->id,
                                         "roundNumber" => $key + 1
                                             ), "schedule_id");

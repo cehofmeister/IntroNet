@@ -31,7 +31,7 @@ class ControlPanelPage extends Page {
                         <div class="timer" data-date="'.$event->getStartDate().' '.$event->getStartTime().'"></div>
                     </div>
                     <div class="row">
-                        <a class="btn btn-default" href="?page=Event&event='.$event->event_id.'" role="button" style="width: 90%;">'.$event->name.'</a>
+                        <a class="btn btn-default" href="?page=Event&event='.$event->Event_id.'" role="button" style="width: 90%;">'.$event->name.'</a>
                     </div>
                     </div>
                 </div>

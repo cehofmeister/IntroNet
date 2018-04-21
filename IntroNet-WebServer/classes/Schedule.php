@@ -1,16 +1,16 @@
 <?php
 
 class Schedule {
-    public static function get($event_id){
+    public static function get($Event_id){
         
     }
     /**
      * This function builds the schedule for the specific event-id
-     * @param int $event_id
+     * @param int $Event_id
      */
-    public static function build($event_id){
-        //$event = new Event($event_id);
-        $event = Event::getEvent($event_id);
+    public static function build($Event_id){
+        //$event = new Event($Event_id);
+        $event = Event::getEvent($Event_id);
         //var_dump($event);
         $participants= $event->getParticipants();
         //var_dump($participants);

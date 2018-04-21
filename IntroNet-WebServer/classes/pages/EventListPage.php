@@ -17,7 +17,7 @@ class EventListPage extends Page {
 //            $table = new HtmlTable();
 //            $table->setHead(["#","Name","Start Date","End Date","Type"]);
 //            foreach ($events as $id => $event)
-//                $table->addRow([$id,'<a href="?page=Event&event='.$event->event_id.'">'.$event->name.'</a>',$event->getStartDate(),$event->getEndDate(),$event->getType()]);
+//                $table->addRow([$id,'<a href="?page=Event&event='.$event->Event_id.'">'.$event->name.'</a>',$event->getStartDate(),$event->getEndDate(),$event->getType()]);
 //            $body->addToCenter($table);
             $body->addToCenter(new CustomHTML($this->pageHTML($events)));
         }else
@@ -75,7 +75,7 @@ class EventListPage extends Page {
                     <?php foreach($events as $id => $event): ?>
                     <tr id="tr-id-<?=$id?>" class="tr-class-<?=$id?>">
                         <td id="td-id-<?=$id?>" class="td-class-<?=$id?>">
-                            <a href="?page=Event&event=<?=$event->event_id?>"><?=$event->name?></a>
+                            <a href="?page=Event&event=<?=$event->Event_id?>"><?=$event->Event_name?></a>
                         </td>
                         <td><?=$event->getConferenceName()?></td>
                         <td><?=$event->getStartDate()?></td>
@@ -95,7 +95,7 @@ class EventListPage extends Page {
                 switch (i) {
                     <?php foreach($conferences as $id => $conference): ?>
                     case <?=$conference->id ?>:
-                        $("table").bootstrapTable('filterBy', {conference: "<?=$conference->name?>"});
+                        $("table").bootstrapTable('filterBy', {conference: "<?=$conference->conference_name?>"});
                         break;
                     <?php endforeach; ?>
                     default :

@@ -10,7 +10,7 @@ class TimerPage extends Page{
         
         // get the selected event or the one that is going to start soon
         if(isset($_POST['event']))
-            $event= Event::getEvents("where event_id=".$_POST['event']);
+            $event= Event::getEvents("where Event_id=".$_POST['event']);
         else   
             $event= Event::getEvents("where TIMESTAMP(`startDate`,`startTime`) > now() order by startDate, startTime LIMIT 0 , 1");
         $event= $event[0];
@@ -50,7 +50,7 @@ class TimerPage extends Page{
   <div class="btn btn-default disabled btn-lg"><div class="timer" data-date="<?=$event->getStartDate()?> <?=$event->getStartTime()?>"></div></div>
   <input type="submit" class="btn btn-primary btn-lg" role="button" value="Start Timer">
   </div>
-  <input type="hidden" name="event" value="<?=$event->event_id?>">
+  <input type="hidden" name="event" value="<?=$event->Event_id?>">
   <input type="hidden" name="do" value="start">
       </form>
   

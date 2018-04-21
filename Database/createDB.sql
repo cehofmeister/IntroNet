@@ -168,7 +168,7 @@ CREATE TABLE `Registration` (
 ALTER TABLE `Attending`
   ADD PRIMARY KEY (`att_event`,`att_participant`) USING BTREE,
   ADD KEY `att_participant_idx` (`att_participant`) USING BTREE,
-  ADD KEY `att_event_idx` (`att_event`) USING BTREE;
+  ADD KEY `att_Event_idx` (`att_event`) USING BTREE;
 
 --
 -- Indexes for table `Conference`
@@ -197,14 +197,14 @@ ALTER TABLE `Meeting_round`
 --
 ALTER TABLE `Meeting_table`
   ADD PRIMARY KEY (`number`,`tab_event`),
-  ADD KEY `tab_event_idx` (`tab_event`) USING BTREE;
+  ADD KEY `tab_Event_idx` (`tab_event`) USING BTREE;
 
 --
 -- Indexes for table `Organisation`
 --
 ALTER TABLE `Organisation`
   ADD PRIMARY KEY (`organisation_id`),
-  ADD KEY `org_event_idx` (`org_event`) USING BTREE;
+  ADD KEY `org_Event_idx` (`org_event`) USING BTREE;
 
 --
 -- Indexes for table `Participant`
@@ -219,7 +219,7 @@ ALTER TABLE `Participant`
 ALTER TABLE `Poster`
   ADD PRIMARY KEY (`Poster_id`),
   ADD KEY `fk_Poster_Participant1_idx` (`presented_by`),
-  ADD KEY `pos_event_idx` (`pos_event`) USING BTREE;
+  ADD KEY `pos_Event_idx` (`pos_event`) USING BTREE;
 
 --
 -- Indexes for table `Poster_visit`
@@ -235,7 +235,7 @@ ALTER TABLE `Poster_visit`
 ALTER TABLE `Registration`
   ADD PRIMARY KEY (`reg_participant`,`reg_event`) USING BTREE,
   ADD UNIQUE KEY `unique_weight` (`weight`),
-  ADD KEY `reg_event_idx` (`reg_event`) USING BTREE,
+  ADD KEY `reg_Event_idx` (`reg_event`) USING BTREE,
   ADD KEY `reg_participant_idx` (`reg_participant`) USING BTREE;
 
 --

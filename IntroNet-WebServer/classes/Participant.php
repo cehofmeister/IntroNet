@@ -17,8 +17,8 @@ require_once 'User.php';
 class Participant extends User {
     public $fname;
     public $lname;
-    public $phone;
-    public $preferences;
+    public $phone;  
+    public $email;
     public $id;
     public $weight;
     public $organisation;
@@ -52,7 +52,7 @@ class Participant extends User {
         if(isset($this->preferences))
             return $this->preferences;
         else
-            return $this->preferences = Database::getObjects ("","" ,"SELECT preference FROM Preference Where participant_id=".$this->id." AND event_id=".$event->event_id);
+            return $this->preferences = Database::getObjects ("","" ,"SELECT preference FROM Preference Where participant_id=".$this->id." AND Event_id=".$event->Event_id);
     }
 /**
  * 
@@ -77,10 +77,10 @@ class Participant extends User {
      */
     public function getSchedule(Event $event) {
         if ($event->type == Event::ONETOMANY)
-            return Database::getObjects("Schedule","", "SELECT Schedule.roundNumber as roundNumber, Poster.name as poster_name FROM Schedule ,Meeting_Poster,Poster WHERE Schedule.participant_id=$this->participant_id AND Schedule.event_id=$event->event_id AND Schedule.schedule_id=Meeting_Poster.schedule_id AND Poster.poster_id=Meeting_Poster.poster_id ORDER BY  roundNumber");
+            return Database::getObjects("Schedule","", "SELECT Schedule.roundNumber as roundNumber, Poster.name as poster_name FROM Schedule ,Meeting_Poster,Poster WHERE Schedule.participant_id=$this->participant_id AND Schedule.Event_id=$event->Event_id AND Schedule.schedule_id=Meeting_Poster.schedule_id AND Poster.poster_id=Meeting_Poster.poster_id ORDER BY  roundNumber");
         else{
-            //SELECT Schedule.roundNumber as roundNumber, IFNULL(`Table`.table_name, Meeting_Table.table_number) as table_name FROM Schedule,Meeting_Table,`Table` WHERE participant_id=3 AND Schedule.event_id=5 AND Schedule.schedule_id=Meeting_Table.schedule_id AND Meeting_Table.table_number=`Table`.table_number ORDER BY  roundNumber
-            return Database::getObjects("Schedule","", "SELECT Schedule.roundNumber as roundNumber, Meeting_Table.table_number as table_name FROM Schedule,Meeting_Table WHERE participant_id=$this->participant_id AND event_id=$event->event_id AND Schedule.schedule_id=Meeting_Table.schedule_id ORDER BY  roundNumber");
+            //SELECT Schedule.roundNumber as roundNumber, IFNULL(`Table`.table_name, Meeting_Table.table_number) as table_name FROM Schedule,Meeting_Table,`Table` WHERE participant_id=3 AND Schedule.Event_id=5 AND Schedule.schedule_id=Meeting_Table.schedule_id AND Meeting_Table.table_number=`Table`.table_number ORDER BY  roundNumber
+            return Database::getObjects("Schedule","", "SELECT Schedule.roundNumber as roundNumber, Meeting_Table.table_number as table_name FROM Schedule,Meeting_Table WHERE participant_id=$this->participant_id AND Event_id=$event->Event_id AND Schedule.schedule_id=Meeting_Table.schedule_id ORDER BY  roundNumber");
         }
     }
     
