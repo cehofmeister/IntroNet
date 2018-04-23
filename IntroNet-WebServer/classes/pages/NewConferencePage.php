@@ -26,8 +26,12 @@ class NewConferencePage extends Page {
             "registration_deadline_time"  => "'{$data["eventDeadlineTime"]}'",
         ));
 
-        $organisation_id = Database::insert("Organisation", array(
-            "name" => "'{$data["Organisations"]}'",
+        $body->addToTop(new Message("'{$data["Organisations"]}'", Message::SUCCESS));
+        $body->addToTop(new Message($conference_id, Message::SUCCESS));
+
+
+        Database::insert("Organisation", array(
+            "name" => "'{$data["organisations"]}'",
             "org_conference" => $conference_id
         ));
 
