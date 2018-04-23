@@ -26,8 +26,9 @@ class NewConferencePage extends Page {
             "registration_deadline_time"  => "'{$data["eventDeadlineTime"]}'",
         ));
 
-        $organisation_id = Database::insert("Organisation", array(
-            "name" => "'{$data["Organisations"]}'",
+        //insert into organisation table
+          Database::insert("organisation", array(
+            "name" => "'{$data["organisations"]}'",
             "org_conference" => $conference_id
         ));
 
@@ -51,9 +52,8 @@ class NewConferencePage extends Page {
         $form->addInput(Input::createGroupInput(array(
             Input::dateInput("eventDeadline","Registration Deadline Date",'', True),
             Input::timeInput("eventDeadlineTime","Registration Deadline Time",'', True)
-            ))); 
-        
-        $form->addInput(Input::tokenInput("organisations","Organisations", True));
+            )));
+        $form->addInput(Input::tokenInput("organisations","Organisations",True));
         $body->addToCenter($form);
 
     }
