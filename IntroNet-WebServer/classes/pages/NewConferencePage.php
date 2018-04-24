@@ -26,14 +26,16 @@ class NewConferencePage extends Page {
             "registration_deadline_time"  => "'{$data["eventDeadlineTime"]}'",
         ));
 
-        $body->addToTop(new Message("'{$data["Organisations"]}'", Message::SUCCESS));
+        $body->addToTop(new Message("'{$data["organisations"]}'", Message::SUCCESS));
         $body->addToTop(new Message($conference_id, Message::SUCCESS));
 
-
-        Database::insert("Organisation", array(
-            "name" => "'{$data["organisations"]}'",
-            "org_conference" => $conference_id
-        ));
+        $orgs = explode(", ","{$data["organisations"]}");
+        foreach($orgs as $tokens){
+            Database::insert("Organisation", array(
+                "name" => "'{$tokens}'",
+                "org_conference" => $conference_id
+            ));
+        }
 
         $body->addToTop(new Message("<h3>Conference was created</h3>"
         . "<a href='?page=Conference&conference=$conference_id'>Click Here to View Conference's Details</a>", Message::SUCCESS));
