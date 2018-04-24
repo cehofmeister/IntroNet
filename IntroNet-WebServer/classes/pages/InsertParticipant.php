@@ -8,7 +8,7 @@ class InsertParticipant extends Page {
             $lname = Validation::validate($data["lastName"], Validation::NAME);
             $phone = $data['contactNo'];
             $email = Validation::validate($data["email"], Validation::EMAIL);
-            $password = Validation::validate($data["password"], Validation::PASSWORD);
+            $password = "";     //Validation::validate($data["password"], Validation::PASSWORD);
             $organisation= $data['organisation'];
             $biography = "";
             $icebreaker_question = "";

@@ -114,7 +114,7 @@ class Participant extends User {
  * @param addParticipant $vip whether the participant is VIP or not
  * @param addParticipant $phone contact number of the participant
      */
-    public static function addParticipant($conference,$fname,$password,$lname,$email,$organisation,$biography,$icebreaker_question,$disability,$weight,$phone="NULL"){
+    public static function addParticipant($fname,$lname,$phone,$email,$password,$organisation,$biography,$icebreaker_question,$weight){
         $participants = Database::insert("Participant",array(
             "fname"=>"'$fname'",
             "lname"=>"'$lname'",
@@ -124,7 +124,6 @@ class Participant extends User {
             //"conference_id"=>$conference,
             "organisation"=>$organisation,
             "biography"=>"'$biography'",
-            "disabled"=>(int) $disability,
             "icebreaker_question"=>"'icebreaker_question'",
             "weight"=>"'$weight'",
         ));
