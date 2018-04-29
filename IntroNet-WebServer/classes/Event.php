@@ -49,7 +49,7 @@ class Event {
      * @param date $endDate this is the end date of the event
      * @param time $endTime This is the end time of the event
      * @param string $type this is the type of the event whether it is one-one and one-many
-     * @return \Event this returns the newly created event
+     * @return Event this returns the newly created event
      * 
      */
     public static function create($Event_name,$startDate,$startTime,$endDate,$endTime,$type) {
@@ -90,7 +90,7 @@ class Event {
         return date("m/d/Y", strtotime($this->startDate));
     }
      /**
-     * This is the starttime of the event
+     * This is the startTime of the event
      * @param time getStartTime this is start time of the event
      * @return date returns start time of the event
      */
@@ -111,7 +111,7 @@ class Event {
      * @return time returns End time of the event
      */
     public function getEndTime(){
-        return  date("H:i",strtotime($this->endTime));
+        return date("H:i",strtotime($this->endTime));
     }
     /**
      * This function shows the count down of the event
@@ -151,7 +151,7 @@ class Event {
      * @return int total number of participants
      */
     public function getNumberOfParticipation(){
-        return Database::count("Registration", "WHERE Event_id=".$this->Event_id);
+        return Database::count("registration", "WHERE Event_id=".$this->Event_id);
     }
 
     
@@ -162,7 +162,7 @@ class Event {
      * @return participant returns if the participants is registered, else returns null
      */
     public function isRegistered($participant_id){
-        return (bool) Database::count("Registration", "WHERE participant_id=$participant_id AND Event_id=".$this->Event_id);
+        return (bool) Database::count("registration", "WHERE participant_id=$participant_id AND Event_id=".$this->Event_id);
     }
     
     public function isAttended($Participant)
@@ -187,13 +187,13 @@ class Event {
      */
     public function getParticipants()
     {
-        $participants = Database::getObjects("Participant", "", "
+        $participants = Database::getObjects("participant", "", "
             SELECT * 
-            FROM  Participant, Registration
+            FROM  participant, registration
             WHERE
-            Registration.participant_id = Participant.participant_id
+            registration.reg_participant = participant.participant_id
             AND
-            Registration.Event_id = ".$this->Event_id);
+            registration.reg_event = ".$this->Event_id);
         return $participants;
     }
     /*
@@ -201,14 +201,14 @@ class Event {
      * @return int returns the number of participants who are registered for the event.
      */
     public function getNumberOfParticipants(){
-        return Database::count("Participant",",Registration Where Participant.participant_id=Registration.participant_id AND Event_id =".$this->Event_id);
+        return Database::count("participant",",registration Where participant.participant_id=registration.reg_participant AND Event_id =".$this->Event_id);
     }
 /**
  * @param string getConferenceName this function returns the names of all conferences
  * @return object returns the names of the conference
  */
     public function getConferenceName() {
-        $conference = Database::getObject("Conference","conference_id=".$this->event_conference_id);
+        $conference = Database::getObject("conference","conference_id=".$this->event_conference_id);
         return $conference->conference_name;
     }
 
@@ -220,7 +220,7 @@ class Event {
     public static function getEvents($options="") {
         //$events =[];
         //Database::get("Select Event_name, start_date, start_time, end_date, end_time FROM EVENT");
-        $events = Database::getObjects("Event",$options);
+        $events = Database::getObjects("event",$options);
         return $events;
     }
     /**
@@ -230,7 +230,7 @@ class Event {
      * @return string this function returns the list of all events
      */
     public static function getEvent($id,$options="") {
-        $event = Database::getObject("Event","Event_id=$id ".$options);
+        $event = Database::getObject("event","Event_id=$id ".$options);
         return $event;
     }
     /**
@@ -239,7 +239,7 @@ class Event {
      */
     public function getPosters($options="") {
         /* @var $posters Poster[] */
-        $posters = Database::getObjects("Poster","WHERE Event_id= $this->Event_id ".$options);
+        $posters = Database::getObjects("poster","WHERE Event_id= $this->Event_id ".$options);
         //var_dump($posters);
         $numberOfParticipants = $this->getNumberOfParticipants();
         $numberOfPosters= count($posters);
@@ -252,27 +252,27 @@ class Event {
     }
     /**
      * this is the function register function for the participants
-     * @param int $Participant_id this is the participant id
+     * @param int $participant_id this is the participant id
      * @param string $preferences this is the preferences
      * @param string $icebreaker_question this is the ice breaker questions
      * @param string $biography this is the biography
      * @return participant register the participant
      */
-    public function register($Participant_id,$preferences,$icebreaker_question="NULL",$biography="NULL"){
+    public function register($participant_id,$preferences,$icebreaker_question="NULL",$biography="NULL"){
         $ok=true;
         //var_dump("start=$ok");
-        $ok= $ok && Database::insert("Registration",array(
+        $ok= $ok && Database::insert("registration",array(
             "Event_id"          =>  $this->Event_id,
-            "participant_id"    =>  $Participant_id,
+            "participant_id"    =>  $participant_id,
             "icebreaker_question"=> $icebreaker_question,
             "biography"         =>  $biography
         ));
         //var_dump("event=$ok");
         //var_dump($preferences);
         foreach ($preferences as $p) {
-            $ok= $ok && Database::insert("Preference",array(
+            $ok= $ok && Database::insert("preference",array(
                 "Event_id"          =>  $this->Event_id,
-                "participant_id"    =>  $Participant_id,
+                "participant_id"    =>  $participant_id,
                 "preference"        =>  $p
             ));
             //var_dump("preference$p=$ok");

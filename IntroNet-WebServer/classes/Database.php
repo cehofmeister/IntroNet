@@ -107,7 +107,7 @@ class Database {
      */
     public static function count($name,$options="") {        
         $connection = self::connect();
-        $STH = $connection->query("SELECT count(*) as total from $name ".$options);
+        $STH = $connection->query("SELECT count(*) as total from $name ".$options) or die($connection->error);
         return $STH->fetchColumn();
     }
     

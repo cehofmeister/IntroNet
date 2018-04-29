@@ -39,14 +39,14 @@ class Conference {
  * @return Participant
  */
     public static function getParticipants($id){
-        $sql="SELECT participant_id,fname,lname,phone,email, Organisation.name as organisation ,  IF(invitation IS NULL,'','✓') AS invitation, IF(disabled = 0,'','✓') AS disabled  ,
+        $sql="SELECT participant_id,fname,lname,phone,email, organisation.name as organisation ,  IF(invitation IS NULL,'','✓') AS invitation, IF(disabled = 0,'','✓') AS disabled  ,
 
 (CASE WHEN EXISTS (
 
 SELECT *
-FROM Event, Registration
+FROM event, registration
 WHERE 
-Registration.participant_id = Participant.participant_id
+registration.reg_participant = Participant.participant_id
 AND Registration.Event_id = Event.Event_id
 AND Event.conference_id =$id
 
@@ -71,9 +71,9 @@ ELSE  ''
 END
 ) AS hasSchedule
 
-FROM Participant, Organisation
-WHERE Participant.conference_id =$id AND Organisation.organisation_id = Participant.organisation";
-        //$participant = Database::getObjects("Participant","","Select participant_id,fname,lname,phone,email, Organisation.name as organisation From Participant,Organisation where Organisation.organisation_id = Participant.organisation AND conference_id = $id");
+FROM Participant, organisation
+WHERE Participant.conference_id =$id AND organisation.organisation_id = Participant.organisation";
+        //$participant = Database::getObjects("Participant","","Select participant_id,fname,lname,phone,email, organisation.name as organisation From Participant,Organisation where organisation.organisation_id = Participant.organisation AND conference_id = $id");
         $participant = Database::getObjects("Participant","",$sql);
 
         return $participant;
@@ -81,21 +81,21 @@ WHERE Participant.conference_id =$id AND Organisation.organisation_id = Particip
     /**
      * This function gets the number of participants
      * @param getNumberOfParticipants
-     * @return Participants
+     * @return participants
      */
     public function getNumberOfParticipants(){
         return Database::count("Participant"," Where conference_id =".$this->conference_id);
     }
     /**
      * @param getNumberOfNewParticipants This function gets the list of new participants
-     * @return Participants
+     * @return participants
      */
     public function getNumberOfNewParticipants(){
         return Database::count("Participant"," Where invitation IS NULL AND conference_id =".$this->conference_id);
     }
    /**
     * @param getNumberOfScheduleParticipants this function gets the schedule of the participants
-    * @return Participants
+    * @return participants
     */
     public function getNumberOfScheduleParticipants(){
         return Database::count("Participant",",Schedule,Event Where Schedule.participant_id = Participant.participant_id AND Schedule.Event_id = Event.Event_id AND  Event.conference_id =".$this->conference_id);
