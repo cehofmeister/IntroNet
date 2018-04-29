@@ -143,7 +143,7 @@ class Event {
      * @return int number of participants in the conference
      */
     public function getNumberOfConferenceParticipant(){
-        return Database::count("Participant", "WHERE conference_id=".$this->event_conference_id);
+        return Database::count("participant", "WHERE conference_id=".$this->event_conference_id);
     }
      /**
  * This is the function which gets the total number of participants

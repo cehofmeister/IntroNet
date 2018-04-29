@@ -100,6 +100,22 @@ class ParticipantListPage extends Page {
                         <th data-field="disabled" data-halign="center" data-align="center"><i class="fa fa-wheelchair" data-toggle="tooltip" data-placement="top" title="Handicapped"></i></th>
                     </tr>
                 </thead>
+                <tbody>
+                <?php foreach(Database::getObjects("participant") as $id => $participant): ?>
+                    <tr id="tr-id-<?=$id?>" class="tr-class-<?=$id?>">
+                        <td data-field="selected" data-checkbox="true"></td>
+                        <td><?=$participant['fname']?></td>
+                        <td><?=$participant['lname']?></td>
+                        <td><?=$participant['organisation']?></td>
+                        <td><?=$participant['phone']?></td>
+                        <td><?=$participant['email']?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><?=$participant['disability']?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
             </table>
         </form>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
