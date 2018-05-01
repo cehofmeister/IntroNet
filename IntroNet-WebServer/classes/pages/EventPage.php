@@ -51,7 +51,7 @@ class EventPage extends Page {
         }
 
         // set the name of the page
-        $this->pageName = $this->event->name;
+        $this->pageName = $this->event->Event_name;
 
 
         $submenu->addLink("Event Details", "?page=Event&event=" . $this->event->Event_id, $subPage == '');
@@ -77,7 +77,7 @@ class EventPage extends Page {
 
         $body->addToTop(new CustomHTML("
             <div class='page-header hidden-print'>
-                <h1> " . $this->event->name . "</h1>
+                <h1> " . $this->event->Event_name . "</h1>
             </div>
         "));
 
@@ -85,7 +85,7 @@ class EventPage extends Page {
             $body->addToCenter(new CustomHTML("
                 <dl class='dl-horizontal' style='font-size:18px'>
                     <dt>Name</dt>
-                    <dd>" . $this->event->name . "</dd>
+                    <dd>" . $this->event->Event_name . "</dd>
                     <dt>Event Type</dt>
                     <dd>" . $this->event->getType() . "</dd>
                     <dt>Start Date</dt>

@@ -107,7 +107,8 @@ class Database {
      */
     public static function count($name,$options="") {        
         $connection = self::connect();
-        $STH = $connection->query("SELECT count(*) as total from $name ".$options) or die($connection->error);
+        $connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $STH = $connection->query("SELECT count(*) as total from ".$name." WHERE ".$options);
         return $STH->fetchColumn();
     }
     

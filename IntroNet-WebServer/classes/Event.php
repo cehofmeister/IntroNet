@@ -143,7 +143,7 @@ class Event {
      * @return int number of participants in the conference
      */
     public function getNumberOfConferenceParticipant(){
-        return Database::count("participant", "WHERE conference_id=".$this->event_conference_id);
+        return Database::count("participant", "part_conference=".$this->event_conference_id);
     }
      /**
  * This is the function which gets the total number of participants
@@ -151,7 +151,7 @@ class Event {
      * @return int total number of participants
      */
     public function getNumberOfParticipation(){
-        return Database::count("registration", "WHERE Event_id=".$this->Event_id);
+        return Database::count("registration", "reg_event=".$this->Event_id);
     }
 
     
@@ -162,7 +162,7 @@ class Event {
      * @return participant returns if the participants is registered, else returns null
      */
     public function isRegistered($participant_id){
-        return (bool) Database::count("registration", "WHERE participant_id=$participant_id AND Event_id=".$this->Event_id);
+        return (bool) Database::count("registration", "reg_participant=$participant_id AND reg_event=".$this->Event_id);
     }
     
     public function isAttended($Participant)
@@ -201,7 +201,7 @@ class Event {
      * @return int returns the number of participants who are registered for the event.
      */
     public function getNumberOfParticipants(){
-        return Database::count("participant",",registration Where participant.participant_id=registration.reg_participant AND Event_id =".$this->Event_id);
+        return Database::count("participant, registration","participant.participant_id=registration.reg_participant AND reg_event =".$this->Event_id);
     }
 /**
  * @param string getConferenceName this function returns the names of all conferences

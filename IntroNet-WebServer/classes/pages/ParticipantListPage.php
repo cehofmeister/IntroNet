@@ -109,8 +109,8 @@ class ParticipantListPage extends Page {
                         <td><?=$participant['organisation']?></td>
                         <td><?=$participant['phone']?></td>
                         <td><?=$participant['email']?></td>
-                        <td></td>
-                        <td></td>
+                        <td>'✓'</td>
+                        <td>'✓'</td>
                         <td></td>
                         <td><?=$participant['disability']?></td>
                     </tr>
