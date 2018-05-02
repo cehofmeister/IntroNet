@@ -107,7 +107,7 @@ WHERE participant.part_conference = $id AND organisation.organisation_id = parti
      * @return Event[]
      */
     public function getEvents() {
-        $events = Event::getEvents("Where conference_id=".$this->conference_id);
+        $events = Event::getEvents("Where event_conference_id=".$this->conference_id);
         return $events;
     }
     /**

@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 class SchedulePage extends Page {
     protected function build(\PageBody &$body, \SubMenu &$submenu) {

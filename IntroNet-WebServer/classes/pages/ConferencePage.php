@@ -83,7 +83,7 @@ class ConferencePage extends Page {
         //$submenu->addLink("Send Email Invitation", "?page=Conference&conference=" . $this->conference->conference_id . "&subpage=send", $subPage == 'send');
         //$submenu->addLink("Add Participant", "#");
         $submenu->addSplitter();
-        $submenu->addLink("All Participants", "#", false, false, $this->conference->getNumberOfParticipants());
+        $submenu->addLink("All Participants", "?page=Event&event=" . $this->conference->conference_id . "&subpage=participants\"", $subPage=='participants', false, $this->conference->getNumberOfParticipants());
         $submenu->addLink("New Participants", "#", false, false, $this->conference->getNumberOfNewParticipants());
         //$submenu->addLink("Participants with no schedule", "#", false, false, $this->conference->getNumberOfParticipants() - $this->conference->getNumberOfScheduleParticipants());
         //$submenu->addLink("Conference Attendances", "#", false, false, 0);
@@ -105,6 +105,7 @@ class ConferencePage extends Page {
         $participants = Conference::getParticipants($_GET['conference']);
 
         foreach ($participants as $p) {
+            //echo $participants;
             $body->addToCenter(new CustomHTML("
                 <div class='page-header visible-print-block'>
                     <h1> " . $this->conference->conference_name . /* " ".$this->conference->registration_start_date. */"</h1>
@@ -120,7 +121,7 @@ class ConferencePage extends Page {
                 $schedule = $p->getSchedule($event);
                 //var_dump($schedule);
 
-                $body->addToCenter(new CustomHTML("<h3>$event->name</h3>"));
+                $body->addToCenter(new CustomHTML("<h3>$event->Event_name</h3>"));
                 if (count($schedule) > 0) {
                     $table = new HtmlTable();
 
@@ -160,7 +161,7 @@ class ConferencePage extends Page {
         try {
             foreach ($events as $event) {
                 $schedule = $event->buildSchedule();
-                $body->addToCenter(new CustomHTML("<h2>" . $event->name . "</h2>"));
+                $body->addToCenter(new CustomHTML("<h2>" . $event->Event_name . "</h2>"));
                 $table = new HtmlTable();
 
                 if ($event->type == Event::ONETOMANY)
@@ -175,7 +176,7 @@ class ConferencePage extends Page {
 //            echo '$schedule';
                 //var_dump($schedule);
 
-                foreach ($schedule as $key => /* @var $poster Poster */ $poster) {
+                foreach ($schedule as $key => /* @var $poster poster */ $poster) {
                     //echo '$poster';
                     //var_dump($poster->rounds);
                     if ($event->type == Event::ONETOMANY)
@@ -185,16 +186,16 @@ class ConferencePage extends Page {
                 }
                 $body->addToCenter($table);
 
-                foreach ($schedule as $key => /* @var $poster Poster */ $poster) {
+                foreach ($schedule as $key => /* @var $poster poster */ $poster) {
                     //var_dump($poster->rounds);
                     foreach ($poster->rounds as $key => $round) {
-                        foreach ($round as /* @var $participant Participant */ $participant) {
+                        foreach ($round as /* @var $participant participant */ $participant) {
                             //echo $poster->name," round $key ",$participant->name,"</br>";
                             $schedule_id = FALSE;
 
                             $schedule_id = Database::insert("schedule", array(
                                         "Event_id" => $event->Event_id,
-                                        "participant_id" => $participant->id,
+                                        "participant_id" => $participant['participant_id'],
                                         "roundNumber" => $key + 1
                                             ), "schedule_id");
                             //var_dump($schedule_id);

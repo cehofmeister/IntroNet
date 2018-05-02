@@ -35,7 +35,7 @@ class OneToOneAlgorithmTest extends PHPUnit_Framework_TestCase {
         $participants = $this->createParticipants(7);
         $event = new Event();
         $event->rounds=2;
-        var_dump(OneToOneAlgorithm::build($participants, $event));
+        //var_dump(OneToOneAlgorithm::build($participants, $event));
         
     }
 

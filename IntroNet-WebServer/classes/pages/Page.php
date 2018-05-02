@@ -5,7 +5,7 @@ require_once './classes/components/Form.php';
 /**
  * This class is the superclass of every webpage
  * @property String UserType Type of user (User/Planner/Participant)
- * @property PageBody body The body of the page
+ * @property PageBody bod The body of the page
  * @property string[] $keywords This contains the keywords in the page
  * @property string $description Contains the description of the page
  * @property string $center_width Contains the center_width of the page

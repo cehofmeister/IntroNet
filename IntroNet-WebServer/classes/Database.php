@@ -76,8 +76,8 @@ class Database {
             return $data;
         }
         else{
-            var_dump($sql." ".$options);
-            var_dump($connection->errorInfo());
+            //var_dump($sql." ".$options);
+            //var_dump($connection->errorInfo());
             return FALSE;
         }
             
@@ -120,21 +120,21 @@ class Database {
      */
     public static function insert($table,Array $values,$id=Null) {
         $connection = self::connect();
-        var_dump($values);
-        var_dump("INSERT INTO $table (".implode(",", array_keys($values)).") VALUES (".implode(",", $values).");");
+        //var_dump($values);
+        //var_dump("INSERT INTO $table (".implode(",", array_keys($values)).") VALUES (".implode(",", $values).");");
         $count = $connection->exec("INSERT INTO $table (".implode(",", array_keys($values)).") VALUES (".implode(",", $values).");");
 
-        echo 'id&count=';
+        /*echo 'id&count=';
         var_dump (isset($id) && $count);
-        echo ' id= '.$id;
+        echo ' id= '.$id;*/
         if($id && $count){
-            echo "s_id=".$connection->lastInsertId($id)." or ".$connection->lastInsertId();
+            //echo "s_id=".$connection->lastInsertId($id)." or ".$connection->lastInsertId();
             return $connection->lastInsertId($id);
         }
             
 
         if($count==FALSE)
-            var_dump("INSERT INTO $table (".implode(",", array_keys($values)).") VALUES (".implode(",", $values).");");
+            //var_dump("INSERT INTO $table (".implode(",", array_keys($values)).") VALUES (".implode(",", $values).");");
                 var_dump($connection->errorInfo());
 
         /* Return number of rows that were inserted */

@@ -15,7 +15,7 @@ class OneToOneAlgorithm {
         $rounds = $event->rounds;
         
         if($rounds > count($participants)/2)
-            throw new AlgorithmException("<h4>Algorithm Exception for event [$event->name]</h4> Number of participants should be at least double the number of rounds");
+            throw new AlgorithmException("<h4>Algorithm Exception for event [$event->Event_name]</h4> Number of participants should be at least double the number of rounds");
 
 
             /* @var $tables Table[] */

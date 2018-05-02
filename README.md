@@ -1,5 +1,5 @@
 #Overview
-InroNet is a web application for the user to organize conferences and events for a conference. There is a planner who is responsible for organizing the event and a participant who would be attending the event. The participant can be classified into VIP, non-VIP participant. Planner would register the participant for the event. There are two types of event in IntroNet such as One-One and One-Many. In One-One event, the software handles odd number adjustments. As participants move around, a different group of two will convene at a table each time, and extra person will form a group of three. Thus, the extra person gets to meet new people every round just like everyone else. In One-Many scenario participant is allowed to attend multiple posters, which he would like to visit during the event. You can further go through the other sections of this page to know some more information of the project.
+IntroNet is a web application for the user to organize conferences and events for a conference. There is a planner who is responsible for organizing the event and a participant who would be attending the event. The participant can be classified into VIP, non-VIP participant. Planner would register the participant for the event. There are two types of event in IntroNet such as One-One and One-Many. In One-One event, the software handles odd number adjustments. As participants move around, a different group of two will convene at a table each time, and extra person will form a group of three. Thus, the extra person gets to meet new people every round just like everyone else. In One-Many scenario participant is allowed to attend multiple posters, which he would like to visit during the event. You can further go through the other sections of this page to know some more information of the project.
 
 #System Requirements
 ###Operating System (One of them):
@@ -72,3 +72,6 @@ To run this project you have to copy this project in WAMP server. Make sure you 
 - Chakshu Manrao
 - Rania Alkhazaali
 - Sandeep Apsingekar
+- Jimmy Schraeder
+- Chase Hofmeister
+- Caleb Nannie

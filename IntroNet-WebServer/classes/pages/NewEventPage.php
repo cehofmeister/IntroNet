@@ -39,7 +39,7 @@ class NewEventPage extends Page {
             if ($eventLength != "")
                 $rounds = ((int) $eventLength) / ((int) $session);
 
-        echo("'{$data["eventName"]}'"."'{$data["eventStartTime"]}'"."'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventStartDate"])))."'".
+        /*echo("'{$data["eventName"]}'"."'{$data["eventStartTime"]}'"."'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventStartDate"])))."'".
                     "'".date('Y-m-d', strtotime(str_replace('-', '/',  $data["eventEndDate"])))."'");/*.
                     "'{$data["eventEndTime"]}'".$rounds.$session.$eventLength.$data["typeOfEvent"] == "One to One" ? 1 : 2).$data["conference"]);
 */
