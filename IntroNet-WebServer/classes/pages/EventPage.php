@@ -132,7 +132,7 @@ class EventPage extends Page {
             $table = new HtmlTable();
             $table->setHead(array("First Name", "Last Name", "Email", "Phone"));
             foreach ($this->event->getParticipants() as $key => $participant) {
-                $table->addRow(array($participant->fname, $participant->lname, $participant->email, $participant->phone));
+                $table->addRow(array($participant['fname'], $participant['lname'], $participant['email'], $participant['phone']));
             }
             $body->addToCenter($table);
         } elseif ($subPage == "EventTables") {

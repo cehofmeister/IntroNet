@@ -42,7 +42,7 @@ class TimerPage extends Page{
         ob_start();
         ?>
 <div class="jumbotron">
-  <h1><?=$event->name?></h1>
+  <h1><?=$event->Event_name?></h1>
   <p>The event going to start soon</p>
   
       <form action="index.php?page=Timer" method="post">

@@ -22,14 +22,14 @@ class ParticipantListPage extends Page {
     }
 
     public function callBack($data, $action, \PageBody &$body) {
-//        $table = new HtmlTable();
-//        $table->setHead(["First Name","Last Name","Organisation"]);
-//        $participants = Participant::getParticipants(0);
-//        //$body->addToCenter(new Message(var_dump($participants)));
-//        foreach ($participants as $key => $participant) {
-//            $table->addRow([$participant->fname,$participant->lname,$participant->organisation]);
-//        }
-//        $body->addToCenter($table);
+    //        $table = new HtmlTable();
+    //        $table->setHead(["First Name","Last Name","Organisation"]);
+    //        $participants = Participant::getParticipants(0);
+    //        //$body->addToCenter(new Message(var_dump($participants)));
+    //        foreach ($participants as $key => $participant) {
+    //            $table->addRow([$participant->fname,$participant->lname,$participant->organisation]);
+    //        }
+    //        $body->addToCenter($table);
         if (isset($data['conference']))
             $body->addToCenter(new CustomHTML($this->pageHTML($data)));
     }
@@ -101,20 +101,20 @@ class ParticipantListPage extends Page {
                     </tr>
                 </thead>
                 <tbody>
-                <?php foreach(Database::getObjects("participant") as $id => $participant): ?>
-                    <tr id="tr-id-<?=$id?>" class="tr-class-<?=$id?>">
-                        <td data-field="selected" data-checkbox="true"></td>
-                        <td><?=$participant['fname']?></td>
-                        <td><?=$participant['lname']?></td>
-                        <td><?=$participant['organisation']?></td>
-                        <td><?=$participant['phone']?></td>
-                        <td><?=$participant['email']?></td>
-                        <td>'✓'</td>
-                        <td>'✓'</td>
-                        <td></td>
-                        <td><?=$participant['disability']?></td>
-                    </tr>
-                <?php endforeach; ?>
+<!--                --><?php //foreach(Database::getObjects("participant") as $id => $participant): ?>
+<!--                    <tr id="tr-id---><?//=$id?><!--" class="tr-class---><?//=$id?><!--">-->
+<!--                        <td data-field="selected" data-checkbox="true"></td>-->
+<!--                        <td>--><?//=$participant['fname']?><!--</td>-->
+<!--                        <td>--><?//=$participant['lname']?><!--</td>-->
+<!--                        <td>--><?//=$participant['organisation']?><!--</td>-->
+<!--                        <td>--><?//=$participant['phone']?><!--</td>-->
+<!--                        <td>--><?//=$participant['email']?><!--</td>-->
+<!--                        <td>--><?//=$participant['invitation']?><!--</td>-->
+<!--                        <td></td>-->
+<!--                        <td></td>-->
+<!--                        <td>--><?//=$participant['disability']?><!--</td>-->
+<!--                    </tr>-->
+<!--                --><?php //endforeach; ?>
                 </tbody>
             </table>
         </form>

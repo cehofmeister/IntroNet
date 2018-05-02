@@ -106,8 +106,8 @@ function main($debug_mode) {
                 }
             }
         } else if ($path[1] == "send" && $user->type == "admin") {
-            //echo "p=".json_encode(explode(",",$_POST['participants']));
-            //echo " ,m=".json_encode($_POST['message']);
+            echo "p=".json_encode(explode(",",$_POST['participants']));
+            echo " ,m=".json_encode($_POST['message']);
             $invitation = new Invitation(explode(",",$_POST['participants']),$_POST['message']);
             //$invitation->send();
         } else {

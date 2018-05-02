@@ -192,7 +192,7 @@ class ConferencePage extends Page {
                             //echo $poster->name," round $key ",$participant->name,"</br>";
                             $schedule_id = FALSE;
 
-                            $schedule_id = Database::insert("Schedule", array(
+                            $schedule_id = Database::insert("schedule", array(
                                         "Event_id" => $event->Event_id,
                                         "participant_id" => $participant->id,
                                         "roundNumber" => $key + 1
@@ -202,14 +202,14 @@ class ConferencePage extends Page {
                             if ($schedule_id) {
                                 if ($event->type == Event::ONETOMANY) {
                                     //var_dump(
-                                            Database::insert("Meeting_Poster", array(
+                                            Database::insert("meeting_poster", array(
                                                 "schedule_id" => $schedule_id,
                                                 "poster_id" => $poster->id
                                             ));
                                     //);
                                 } else {
                                     //var_dump(
-                                            Database::insert("Meeting_Table", array(
+                                            Database::insert("meeting_table", array(
                                                 "schedule_id" => $schedule_id,
                                                 "table_number" => $poster->id
                                             ));

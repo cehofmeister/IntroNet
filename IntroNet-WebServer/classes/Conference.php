@@ -39,7 +39,7 @@ class Conference {
  * @return Participant
  */
     public static function getParticipants($id){
-        $sql="SELECT participant_id,fname,lname,phone,email, organisation.name as organisation ,  IF(invitation IS NULL,'','✓') AS invitation, IF(disabled = 0,'','✓') AS disabled  ,
+        $sql="SELECT participant_id,fname,lname,phone,email, organisation.name as organisation ,  IF(invitation IS NULL,'','✓') AS invitation, IF(disability = 0,'','✓') AS disability  ,
 
 (CASE WHEN EXISTS (
 
@@ -47,8 +47,8 @@ SELECT *
 FROM event, registration
 WHERE 
 registration.reg_participant = participant.participant_id
-AND registration.Event_id = event.Event_id
-AND event.conference_id =$id
+AND registration.reg_event = event.Event_id
+AND event.event_conference_id =$id
 
 )
 THEN  '✓'
@@ -63,7 +63,7 @@ FROM event, schedule
 WHERE 
 schedule.participant_id = participant.participant_id
 AND schedule.Event_id = event.Event_id
-AND event.conference_id =$id
+AND event.event_conference_id =$id
 
 )
 THEN  '✓'
@@ -72,7 +72,7 @@ END
 ) AS hasSchedule
 
 FROM participant, organisation
-WHERE Participant.conference_id =$id AND organisation.organisation_id = participant.organisation";
+WHERE participant.part_conference = $id AND organisation.organisation_id = participant.organisation";
         //$participant = Database::getObjects("Participant","","Select participant_id,fname,lname,phone,email, organisation.name as organisation From Participant,Organisation where organisation.organisation_id = Participant.organisation AND conference_id = $id");
         $participant = Database::getObjects("participant","",$sql);
 

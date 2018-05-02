@@ -12,9 +12,11 @@ class InsertParticipant extends Page {
             $organisation= $data['organisation'];
             $biography = "";
             $icebreaker_question = "";
-            //$disability = isset($data['disability']);
+            $part_conference = isset($data['conference']);
+            $disability = isset($data['disability']);
             $weight = isset($data['vip']);
-            Participant::addParticipant($fname, $lname, $phone, $email, $password, $organisation, $biography, $icebreaker_question, $weight);
+            $invitation = "";
+            Participant::addParticipant($fname, $lname, $phone, $email, $password, $organisation, $biography, $icebreaker_question,$part_conference, $weight, $disability,$invitation);
        }
         //
         //var_dump($data);

@@ -16,8 +16,12 @@ class ControlPanelPage extends Page {
                 <div class="ControlPanel">
                 ';
         foreach ($events as $key => $event) {
-            $participants=$event->getNumberOfConferenceParticipant();
-            $participation=$event->getNumberOfParticipation()/$participants*100;
+            $participants = $event->getNumberOfConferenceParticipant();
+            if ($participants == 0) {
+                $participation = 0;
+            } else {
+                $participation = $event->getNumberOfParticipation() / $participants * 100;
+            }
             $html .= '
                 <div class="col-md-3" style="text-align: center;">
                     <div class="well">

@@ -109,7 +109,7 @@ CREATE TABLE `Organisation` (
 -- Table structure for table `Participant`
 --
 
-CREATE TABLE `Participant` (
+CREATE TABLE `participant` (
   `participant_id` int(10) UNSIGNED NOT NULL,
   `fname` varchar(45) NOT NULL,
   `lname` varchar(45) NOT NULL,

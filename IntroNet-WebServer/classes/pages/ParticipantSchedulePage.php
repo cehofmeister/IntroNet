@@ -9,13 +9,13 @@ class ParticipantSchedulePage extends Page {
                 <h1> " . $participant->fname . " " . $participant->lname . " Schedule</h1>
             </div>
         "));
-        $conference = Conference::getConference($participant->conference_id);
+        $conference = Conference::getConference($participant['part_conference']);
 
         foreach ($conference->getEvents() as $event) {
 
             $schedule = $participant->getSchedule($event);
 
-            $body->addToCenter(new CustomHTML("<h3>$event->name</h3>"));
+            $body->addToCenter(new CustomHTML("<h3>$event->Event_name</h3>"));
             if (count($schedule) > 0) {
                 $table = new HtmlTable();
 

@@ -54,8 +54,8 @@ class NewEventPage extends Page {
                     "eventLength"   => $eventLength,
                     "type"          => ($data["typeOfEvent"] == "One to One" ? 1 : 2),
                     "event_conference_id" => $data["conference"],
-                    "meeting_rounds"=> "3",
-                    "poster_rounds" => "4"
+                    "meeting_rounds"=> "0",
+                    "poster_rounds" => "0"
 
                         ));
 

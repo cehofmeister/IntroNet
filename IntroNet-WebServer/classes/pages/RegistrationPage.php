@@ -28,7 +28,7 @@ class RegistrationPage extends Page {
         $conference = Conference::getConference($conference_id);
         $c = new CustomHTML("
                     <div class='jumbotron'>
-                      <h1> $conference->name </h1>
+                      <h1> $conference->conference_name </h1>
                       <p>Please enter your email and password to complete registration process</p>
                    
                     ");
@@ -66,7 +66,7 @@ class RegistrationPage extends Page {
         $form = new Form("registration");
 
         foreach ($events as $key => $event) {
-            $section = $form->newSection(Input::checkBox("event" . $event->Event_id, "") . $event->name . "  <small>".$event->getStartDay()."  From $event->startTime to ".$event->getEndTime()."</small>");
+            $section = $form->newSection(Input::checkBox("event" . $event->Event_id, "") . $event->Event_name . "  <small>".$event->getStartDay()."  From $event->startTime to ".$event->getEndTime()."</small>");
             if ($event->type == 1) // one to one
                 $input = Input::checklist("event" . $event->Event_id . "list", "Who you want to meet?", $organisations);
             else if ($event->type == 2) // one to many
@@ -105,7 +105,7 @@ class RegistrationPage extends Page {
         $table = new HtmlTable();
         $table->setHead(array("Name","organisation"));
         /* @var $participants Participant[] */
-        $participants = Database::getObjects("Participant","","SELECT Participant.fname as fname,Participant.lname as lname, Organisation.name as organisation From Participant,Organisation Where Participant.conference_id=$conference->conference_id AND Organisation.organisation_id=Participant.organisation ORDER By lname" );
+        $participants = Database::getObjects("Participant","","SELECT participant.fname as fname,participant.lname as lname, organisation.name as organisation From participant,organisation Where Participant.part_conference=$conference->conference_id AND organisation.organisation_id=Participant.organisation ORDER By lname" );
         foreach ($participants as $key => $participant) {
             $table->addRow(array($participant->name,$participant->organisation));
         }

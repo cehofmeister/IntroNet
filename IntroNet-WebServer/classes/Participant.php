@@ -65,7 +65,7 @@ class Participant extends User {
     }
 /**
  * 
- * @param hasPreference $preference checks whether the participant has a prefernce or not
+ * @param hasPreference $preference checks whether the participant has a preference or not
  * @return $preference returns the preference of the participant
  */
     public function hasPreference($preference){
@@ -101,42 +101,44 @@ class Participant extends User {
     * @return $event gets all the participants who belong to this event
     */
     public static function getParticipants($event){
-        $participants = Database::getObjects("Participant","","Select fname,lname,phone,email, Organisation.name as organisation From Participant,Organisation where Organisation.organisation_id = Participant.organisation");
+        $participants = Database::getObjects("participant","","Select fname,lname,phone,email, Organisation.name as organisation From Participant,Organisation where Organisation.organisation_id = Participant.organisation");
         return $participants;
     }
     /**
-     *@param addParticipant $conference This is the name of the conference which the participant belongs to
+     *@param addParticipant $part_conference This is the name of the conference which the participant belongs to
  *@param addParticipant $fname This is the first name of the participant
    *@param addParticipant $lname Last name of the participant
  * @param addParticipant $email email id of the participant
  * @param addParticipant $organisation organisation of the participant
  * @param addParticipant $disability disability status of the participant
- * @param addParticipant $vip whether the participant is VIP or not
+ * @param addParticipant $weight whether the participant is VIP or not
  * @param addParticipant $phone contact number of the participant
      */
-    public static function addParticipant($fname,$lname,$phone,$email,$password,$organisation,$biography,$icebreaker_question,$weight){
-        $participants = Database::insert("Participant",array(
+    public static function addParticipant($fname,$lname,$phone,$email,$password,$organisation,$biography,$icebreaker_question,$part_conference,$disability,$weight, $invitation){
+        $participants = Database::insert("participant",array(
             "fname"=>"'$fname'",
             "lname"=>"'$lname'",
             "phone"=>"'$phone'",
             "email"=>"'$email'",
             "password"=>"'$password'",
-            //"conference_id"=>$conference,
-            "organisation"=>$organisation,
+            "organisation"=>"'$organisation'",
             "biography"=>"'$biography'",
-            "icebreaker_question"=>"'icebreaker_question'",
+            "icebreaker_question"=>"'$icebreaker_question'",
+            "part_conference"=>"'$part_conference'",
+            "disability"=>"'$disability'",
             "weight"=>"'$weight'",
+            "invitation"=>"'$invitation'"
         ));
         //return $participants;
        // var_dump(func_get_args());
     }
  /**
   * 
-  * @param setInvitation $invitation this function helps in creating invitation for the participant
+  * @param string $invitation this function helps in creating invitation for the participant
   * @return participant returns the participant to which the email was sent
   */
     public function setInvitation($invitation){
-        Database::update("Participant", "invitation='$invitation'", " participant_id=".$this->participant_id);
+        Database::update("participant", "invitation='$invitation'", " participant_id=".$this->participant_id);
     } 
     /**
      * 
@@ -145,7 +147,7 @@ class Participant extends User {
      * @return $email,$password this function helps in logging in
      */
     public static function login($email,$password){
-        return Database::getObject("Participant", "email='$email' AND invitation='$password' AND invitation IS NOT NULL");
+        return Database::getObject("participant", "email='$email' AND invitation='$password' AND invitation IS NOT NULL");
     }
     public function __get($name) {
         if($name=="name")
