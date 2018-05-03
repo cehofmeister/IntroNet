@@ -357,8 +357,6 @@ CREATE TABLE `participant` (
   `email` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `organisation` int(10) UNSIGNED NOT NULL,
-  `biography` longtext,
-  `icebreaker_question` varchar(45) DEFAULT NULL,
   `weight` int(10) UNSIGNED NOT NULL,
   `part_conference` int(10) UNSIGNED NOT NULL,
   `disability` tinyint(1) NOT NULL,
@@ -369,7 +367,7 @@ CREATE TABLE `participant` (
 -- Dumping data for table `participant`
 --
 
-INSERT INTO `participant` (`participant_id`, `fname`, `lname`, `phone`, `email`, `password`, `organisation`, `biography`, `icebreaker_question`, `weight`, `part_conference`, `disability`, `invitation`) VALUES
+INSERT INTO `participant` (`participant_id`, `fname`, `lname`, `phone`, `email`, `password`, `organisation`, `weight`, `part_conference`, `disability`, `invitation`) VALUES
   (1, 'Jimmy', 'Schraeder', '5555555555', 'jsschraeder@bsu.edu', '', 1, '', '', 0, 1, 0, ''),
   (2, 'jack', 'bee', '7777777777', 'jsschraeder@bsu.edu', '', 1, '', '', 0, 1, 0, ''),
   (3, 'brian', 'ryan', '5555555556', 'jsschraeder@bsu.edu', '', 1, '', '', 0, 1, 0, ''),

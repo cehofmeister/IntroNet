@@ -109,7 +109,7 @@ $(".timer").each(function( index ) {
 
 <div class="jumbotron">
 <center>
-<h1><?=$event->name?></h1>
+<h1><?=$event->Event_name?></h1>
 
 <h2 id="round">Round 1</h2>
 

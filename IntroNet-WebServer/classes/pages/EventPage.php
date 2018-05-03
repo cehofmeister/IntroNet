@@ -106,7 +106,7 @@ class EventPage extends Page {
             "));
         else if ($subPage == 'update') {
             $form = new Form("Event&event=" . $this->event->Event_id . "&subpage=update");
-            $form->addInput(Input::textInput("eventName", "Event Name", $this->event->name, TRUE));
+            $form->addInput(Input::textInput("eventName", "Event Name", $this->event->Event_name, TRUE));
             $form->addInput(Input::createGroupInput(array(
                         Input::dateInput("startDate", "Start Date", $this->event->getStartDate(), TRUE),
                         Input::timeInput("startTime", "Start Time", $this->event->getStartTime(), TRUE)

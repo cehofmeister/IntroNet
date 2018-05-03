@@ -258,12 +258,12 @@ class Event {
      * @param string $biography this is the biography
      * @return participant register the participant
      */
-    public function register($participant_id,$preferences,$icebreaker_question="NULL",$biography="NULL"){
+    public function register($participant_id,$preferences,$icebreaker_question,$biography){
         $ok=true;
         //var_dump("start=$ok");
         $ok= $ok && Database::insert("registration",array(
-            "Event_id"          =>  $this->Event_id,
-            "participant_id"    =>  $participant_id,
+            "reg_event"          =>  $this->Event_id,
+            "reg_participant"    =>  $participant_id,
             "icebreaker_question"=> $icebreaker_question,
             "biography"         =>  $biography
         ));
@@ -271,8 +271,8 @@ class Event {
         //var_dump($preferences);
         foreach ($preferences as $p) {
             $ok= $ok && Database::insert("preference",array(
-                "Event_id"          =>  $this->Event_id,
-                "participant_id"    =>  $participant_id,
+                "pref_event_id"          =>  $this->Event_id,
+                "pref_part_id"    =>  $participant_id,
                 "preference"        =>  $p
             ));
             //var_dump("preference$p=$ok");
@@ -291,6 +291,7 @@ class Event {
         //echo $this->name;
         
         $participants = $this->getParticipants();
+        var_dump($participants);
         
         
         if($this->type==self::ONETOMANY){

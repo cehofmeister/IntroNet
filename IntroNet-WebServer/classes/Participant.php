@@ -14,8 +14,6 @@ require_once 'User.php';
  * @property String $email Email of the Participant
  * @property int $password password of the participant
  * @property String $organisation organisation to which the participant belongs to
- * @property String $biography bio of the participant
- * @property String $icebreaker_question ice breaker of the participant
  * @property int $weight Describes the weight of the participant based on the priority
  */
 class Participant extends User {
@@ -27,8 +25,6 @@ class Participant extends User {
     public $email;
     public $password;
     public $organisation;
-    public $biography;
-    public $icebreaker_question;
     public $weight;
 
 /**
@@ -114,7 +110,7 @@ class Participant extends User {
  * @param addParticipant $weight whether the participant is VIP or not
  * @param addParticipant $phone contact number of the participant
      */
-    public static function addParticipant($fname,$lname,$phone,$email,$password,$organisation,$biography,$icebreaker_question,$part_conference,$disability,$weight, $invitation){
+    public static function addParticipant($fname,$lname,$phone,$email,$password,$organisation,$part_conference,$disability,$weight, $invitation){
         $participants = Database::insert("participant",array(
             "fname"=>"'$fname'",
             "lname"=>"'$lname'",
@@ -122,8 +118,6 @@ class Participant extends User {
             "email"=>"'$email'",
             "password"=>"'$password'",
             "organisation"=>"'$organisation'",
-            "biography"=>"'$biography'",
-            "icebreaker_question"=>"'$icebreaker_question'",
             "part_conference"=>"'$part_conference'",
             "disability"=>"'$disability'",
             "weight"=>"'$weight'",
@@ -139,6 +133,7 @@ class Participant extends User {
   */
     public function setInvitation($invitation){
         Database::update("participant", "invitation='$invitation'", " participant_id=".$this->participant_id);
+        Database::update("participant", "password='$invitation'", " participant_id=".$this->participant_id);
     } 
     /**
      * 

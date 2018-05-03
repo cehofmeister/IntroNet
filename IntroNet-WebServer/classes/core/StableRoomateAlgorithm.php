@@ -1,6 +1,8 @@
 <?php
 
 class StableRoommateAlgorithm
+
+//source https://github.com/exu/stable-roomates
 {
     public $preferences = [];
     public $proposed = [];

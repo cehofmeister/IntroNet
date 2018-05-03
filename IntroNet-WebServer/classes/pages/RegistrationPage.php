@@ -105,7 +105,7 @@ class RegistrationPage extends Page {
         $table = new HtmlTable();
         $table->setHead(array("Name","organisation"));
         /* @var $participants Participant[] */
-        $participants = Database::getObjects("Participant","","SELECT participant.fname as fname,participant.lname as lname, organisation.name as organisation From participant,organisation Where Participant.part_conference=$conference->conference_id AND organisation.organisation_id=Participant.organisation ORDER By lname" );
+        $participants = Database::getObjects("Participant","","SELECT participant.fname as fname,participant.lname as lname, organisation.name as organisation From participant,organisation Where participant.part_conference=$conference->conference_id AND organisation.organisation_id=participant.organisation ORDER By lname" );
         foreach ($participants as $key => $participant) {
             $table->addRow(array($participant->name,$participant->organisation));
         }
@@ -142,17 +142,19 @@ class RegistrationPage extends Page {
                 //var_dump($events);
                 foreach ($events as $event) {
                     $ok=TRUE;
-                    $registered = $registered || $event->isRegistered($participant->id);
+                    $registered = $registered || $event->isRegistered($participant->participant_id);
                     if(key_exists("event".$event->Event_id, $data)){
                         //echo $event->Event_id;
                         $preferences=array();
                         if(key_exists("event".$event->Event_id."list", $data)){
                             $preferences=  $data["event".$event->Event_id."list"];
+                            $icebreaker = "'{$data["icebreaker"]}'";
+                            $biography = "'{$data["bio"]}'";
                         }
                         //echo 'p=';
                         //var_dump($preferences);
                         //echo 'register';
-                        $ok = $ok && $event->register( $participant->id , $preferences );
+                        $ok = $ok && $event->register( $participant->participant_id , $preferences, $icebreaker, $biography );
                     }
                 }
                 if($ok)

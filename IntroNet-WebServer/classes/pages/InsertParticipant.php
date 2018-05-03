@@ -10,13 +10,11 @@ class InsertParticipant extends Page {
             $email = Validation::validate($data["email"], Validation::EMAIL);
             $password = "";     //Validation::validate($data["password"], Validation::PASSWORD);
             $organisation= $data['organisation'];
-            $biography = "";
-            $icebreaker_question = "";
             $part_conference = isset($data['conference']);
             $disability = isset($data['disability']);
             $weight = isset($data['vip']);
             $invitation = "";
-            Participant::addParticipant($fname, $lname, $phone, $email, $password, $organisation, $biography, $icebreaker_question,$part_conference, $weight, $disability,$invitation);
+            Participant::addParticipant($fname, $lname, $phone, $email, $password, $organisation, $part_conference, $weight, $disability,$invitation);
        }
         //
         //var_dump($data);
