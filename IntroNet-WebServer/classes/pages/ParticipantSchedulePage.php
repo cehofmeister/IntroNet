@@ -3,15 +3,16 @@
 class ParticipantSchedulePage extends Page {
 
     protected function build(\PageBody &$body, \SubMenu &$submenu) {
-        $participant = Participant::getParticipant($_GET['p']);
+        $participant = Participant::getParticipant($_SESSION['p']);
         $body->addToTop(new CustomHTML("
             <div class='page-header'>
                 <h1> " . $participant->fname . " " . $participant->lname . " Schedule</h1>
             </div>
         "));
-        $conference = Conference::getConference($participant['part_conference']);
+        $conference = Conference::getConference($participant->part_conference);
 
         foreach ($conference->getEvents() as $event) {
+
 
             $schedule = $participant->getSchedule($event);
 
