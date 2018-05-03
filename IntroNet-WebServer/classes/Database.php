@@ -135,7 +135,7 @@ class Database {
 
         if($count==FALSE)
             //var_dump("INSERT INTO $table (".implode(",", array_keys($values)).") VALUES (".implode(",", $values).");");
-                var_dump($connection->errorInfo());
+                //var_dump($connection->errorInfo());
 
         /* Return number of rows that were inserted */
         return $count;

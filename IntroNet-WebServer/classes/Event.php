@@ -291,7 +291,7 @@ class Event {
         //echo $this->name;
         
         $participants = $this->getParticipants();
-        var_dump($participants);
+        //var_dump($participants);
         
         
         if($this->type==self::ONETOMANY){

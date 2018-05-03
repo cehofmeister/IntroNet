@@ -48,7 +48,7 @@ class RegistrationPage extends Page {
         $events = $conference->getEvents();
         $organisations = $conference->getOrganisations();
         
-        //var_dump($organisations);
+        //dump($organisations);
         $body->addToCenter(new CustomHTML("<h3>Hello $user->fname,</h3>"));
         
         $body->addToCenter(new CustomHTML('
